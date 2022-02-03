@@ -7,7 +7,7 @@ Note: To use this bot you must create a discord bot application in your discord 
 ## Providing a token
 
 1. Navigate to `main.py` and open it with a text editor.
-2. Replace the code in that file with this, and replace "YOUR TOKEN HERE" with your discord bot token.
+2. Replace "YOUR TOKEN HERE" with your discord bot token.
 ```python
 from utils.tools import Athena
 from utils.tools.Configuration import configuration
