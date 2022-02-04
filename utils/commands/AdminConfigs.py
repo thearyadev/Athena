@@ -10,6 +10,10 @@ import asyncio
 
 
 class admin_configs(commands.Cog, embeds):
+    """
+    Admin config commands for the bot. Only works in DM channel from the bot owner.
+    """
+
     def __init__(self, client):
         self.client = client
 
@@ -76,42 +80,34 @@ class admin_configs(commands.Cog, embeds):
 
     @commands.command("authorize")
     @commands.guild_only()
+    @commands.is_owner()
     async def authorize_bot_usage(self, ctx):
-        if ctx.message.author.id == 305024830758060034:
-            self.client.configs.find_guild(ctx.guild.id).authorized = True
-            self.client.configs.refresh()
-            embed = nextcord.Embed(title="Guild Authorization",
-                                   description="This guild has been authorized. All commands are now activated. ",
-                                   color=self.SUCCESS)
-            await ctx.send(embed=embed)
-        else:
-            raise PermissionError(
-                "Unauthorized usage of command 'authorize'. This command may only be used by the bot owner.")
+
+        self.client.configs.find_guild(ctx.guild.id).authorized = True
+        self.client.configs.refresh()
+        embed = nextcord.Embed(title="Guild Authorization",
+                               description="This guild has been authorized. All commands are now activated. ",
+                               color=self.SUCCESS)
+        await ctx.send(embed=embed)
 
     @commands.command("deactivate")
     @commands.guild_only()
+    @commands.is_owner()
     async def deactivate_bot_usage(self, ctx):
-        if ctx.message.author.id == 305024830758060034:
-            self.client.configs.find_guild(ctx.guild.id).authorized = False
-            self.client.configs.refresh()
-            embed = nextcord.Embed(title="Guild Authorization",
-                                   description="This guild has been unauthorized. All commands are now deactivated. ",
-                                   color=self.SUCCESS)
-            await ctx.send(embed=embed)
-        else:
-            raise PermissionError(
-                "Unauthorized usage of command 'deactivate'. This command may only be used by the bot owner.")
+        self.client.configs.find_guild(ctx.guild.id).authorized = False
+        self.client.configs.refresh()
+        embed = nextcord.Embed(title="Guild Authorization",
+                               description="This guild has been unauthorized. All commands are now deactivated. ",
+                               color=self.SUCCESS)
+        await ctx.send(embed=embed)
 
     @commands.command()
     @commands.guild_only()
+    @commands.is_owner()
     async def configure_manual(self, ctx):
-        if ctx.message.author.id == 305024830758060034:
-            self.client.configs.add_guild(ctx.guild.id)
-            embed = nextcord.Embed(title="Guild Configuration",
-                                   description="This guild has been configured.",
-                                   color=self.SUCCESS)
-            await ctx.send(embed=embed)
-        else:
-            raise PermissionError("Only the bot owner may run this command.")
 
-
+        self.client.configs.add_guild(ctx.guild.id)
+        embed = nextcord.Embed(title="Guild Configuration",
+                               description="This guild has been configured.",
+                               color=self.SUCCESS)
+        await ctx.send(embed=embed)

@@ -51,6 +51,11 @@ class Athena(commands.Bot, ABC):
             self.run(self.configs.token)
 
     def __load_extensions__(self):
+        """
+        Loads all nextcord Cogs into the main process.
+        :return:
+        """
+
         from ..commands.Events import events
         self.add_cog(events(self))
         self.console.info_log("Loaded Module 'events'")

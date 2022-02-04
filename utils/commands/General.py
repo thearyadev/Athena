@@ -15,17 +15,25 @@ class general(commands.Cog, embeds):
         self.client.check(self.check_authorized)
 
     def check_authorized(self, ctx):
+        """
+        Only authorized servers may use commands in this bot.
+         This checks that the guild is authorized before allowing commands go go through.
+        :param ctx:
+        :return:
+        """
+
         if isinstance(ctx.message.channel, nextcord.DMChannel):
             if ctx.message.author.id == 305024830758060034:
-                return True
+                return True  # does not apply to DM channels from the bot owner.
 
         if "configure_manual" in ctx.message.content:
-            return True
+            return True # does not apply if the bot owner is trying to configure the bot
 
         if ctx.message.author.id == 305024830758060034 and "authorize" in ctx.message.content:
-            return True
+            return True # does not apply if the bot owner is trying to authorize the bot
 
         if "authorized" in self.client.configs.find_guild(ctx.guild.id).__dict__.keys():
+            # does checks for the authorized state, raises an error if unauthorized.
             if not self.client.configs.find_guild(ctx.guild.id).__dict__['authorized']:
                 raise CommandError(
                     "This server has not been authorized. Please contact the bot owner to authorize this server")
@@ -36,6 +44,12 @@ class general(commands.Cog, embeds):
 
     @commands.command(name="athena")
     async def athena(self, ctx):
+        """
+        info about the bot
+        :param ctx:
+        :return:
+        """
+
         embed = nextcord.Embed(title="Hi! My name is Athena.",
                                description="Hi. I'm Athena, "
                                            "I am bot designed to help with team management, "
@@ -48,7 +62,11 @@ class general(commands.Cog, embeds):
         await ctx.send(embed=embed)
 
     @commands.command("command")
-    async def commandlist(self, ctx):
+    async def command_list(self, ctx):
+        """
+        command line output of commands list.
+        :param ctx:
+        :return:
+        """
         for command in self.client.walk_commands():
             print(command.name)
-

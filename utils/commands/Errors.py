@@ -7,6 +7,10 @@ import os
 
 
 class errors(commands.Cog, embeds):
+    """
+    Error handling & error output for discord.
+    """
+
     def __init__(self, client):
         self.client = client
 
@@ -14,7 +18,7 @@ class errors(commands.Cog, embeds):
     async def on_command_error(self, ctx, error):
         if isinstance(error, CommandNotFound):
             if not (ctx.message.content.replace(self.client.configs.prefix, "") in os.listdir("./data/media")):
-                self.client.console.error_log(f"Command not found {ctx.message}")
+                self.client.console.error_log(f"Command not found {ctx.message}") # for collections, since they arent valid commands.
             return
         else:
             embed = nextcord.Embed(title="Oh no! An error has occurred. ",
@@ -34,7 +38,7 @@ class errors(commands.Cog, embeds):
                 self.client.console.error_log(f"Exception Raised (Caught by Discord): {tb}")
             except:
                 self.client.console.error_log(f"Unknown error occurred. Likely command args error. (Caught by "
-                                              f"Discord): '{error}'")
+                                              f"Discord): '{error}'") # uncaught errors
 
             await ctx.send(embed=embed)
 

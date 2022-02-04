@@ -3,7 +3,7 @@ import nextcord
 
 class embeds:
     """
-    Creates a discord embed. Makes it easier.
+    Holds colors for embeds.
     """
     # STANDARD COLORS IN HEX
     SUCCESS = 0xf200ff

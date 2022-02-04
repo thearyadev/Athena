@@ -14,6 +14,14 @@ class moderation(commands.Cog, embeds):
     @commands.command("archive")
     @commands.has_permissions(manage_guild=True)
     async def create_channel_history_archive(self, ctx, amount: int, channel: nextcord.TextChannel = None):
+        """
+        Creates a text file with all of the messages sent in a channel.
+        :param ctx:
+        :param amount:
+        :param channel:
+        :return:
+        """
+
         async with ctx.channel.typing():
             if not channel: channel = ctx.channel
             embed = nextcord.Embed(
@@ -52,6 +60,12 @@ class moderation(commands.Cog, embeds):
     @commands.command("athpurge", aliases=['athp'])
     @commands.has_permissions(administrator=True)
     async def purge_channel(self, ctx, amount: int = 0):
+        """
+        deletes param:amount of messages from a channel
+        :param ctx:
+        :param amount:
+        :return:
+        """
         try:
             await ctx.channel.purge(limit=amount)
         except:

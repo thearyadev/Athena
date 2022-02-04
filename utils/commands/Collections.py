@@ -35,27 +35,44 @@ class DropdownView(nextcord.ui.View):
 
 
 class collections(commands.Cog, embeds):
+    """
+    Handles a folder system for storing images in different categories.
+     Users can run a command and it will send a random image in the category they requested
+    """
+
     def __init__(self, client):
         self.client = client
-        self.media_path = "./data/media/"
+        self.media_path = "./data/media/" # media path
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        if message.content.startswith(self.client.configs.prefix):
-            if message.author != self.client.user:
-                queries = os.listdir(self.media_path)
-                if message.content.replace(self.client.configs.prefix, "") in queries:
-                    try:
-                        self.client.console.info_log(f"Command Executed: '{message.content.replace('!', '')}' by {message.author} in {message.guild}")
-                        await message.channel.send(file=nextcord.File(
-                            self.media_path + message.content.replace(self.client.configs.prefix, "") + "/" + random.sample(os.listdir(
+        if message.content.startswith(self.client.configs.prefix): # if the user used the command prefix
+            if message.author != self.client.user: # and the user is not the bot
+                queries = os.listdir(self.media_path) # get a list of all the categories
+                if message.content.replace(self.client.configs.prefix, "") in queries: # if their request is a valid folder
+                    try: # try except in case the folder is empty
+                        self.client.console.info_log(
+                            f"Command Executed: '{message.content.replace('!', '')}' by {message.author} in {message.guild}")
+                        await message.channel.send(file=nextcord.File( # pick a random file from the folder, and send it.
+                            self.media_path + message.content.replace(self.client.configs.prefix, "") + "/" +
+                            random.sample(os.listdir(
                                 self.media_path + message.content.replace(self.client.configs.prefix, "")), 1)[0]))
-                        self.client.console.info_log(f"Media sent from collection {message.content.replace(self.client.configs.prefix, '')}")
+                        self.client.console.info_log(
+                            f"Media sent from collection {message.content.replace(self.client.configs.prefix, '')}")
                     except ValueError:
-                        self.client.console.info_log(f"Collection: {message.content.replace(self.client.configs.prefix, '')} is empty.")
+                        self.client.console.info_log(
+                            f"Collection: {message.content.replace(self.client.configs.prefix, '')} is empty.")
 
     @commands.command(name="addcollection")
     async def add_section(self, ctx, name):
+        """
+        Creates a folder
+
+        :param ctx:
+        :param name:
+        :return:
+        """
+
         try:
             self.client.console.info_log(f"Collection: {name} has been created")
             os.mkdir(f"{self.media_path}{name}")
@@ -72,6 +89,12 @@ class collections(commands.Cog, embeds):
 
     @commands.command(name="addmedia")
     async def add_media(self, ctx):
+        """
+        Adds an image to a folder.
+        :param ctx:
+        :return:
+        """
+
         if ctx.message.attachments:
             formats = ("image/png", "image/jpeg", "image/jpg")
             r = requests.get(ctx.message.attachments[0], stream=True)

@@ -28,7 +28,8 @@ class Confirm(nextcord.ui.View):
 
 class repair_channel_order(commands.Cog, embeds):
     """
-    These commands are Starcity eSports Moderation commands. All commands are administrator only.
+    Recursively reorders the channels according to a json file.
+    Designed for starcity esports to fix a channel order problem
     """
 
     def __init__(self, client):
@@ -41,6 +42,11 @@ class repair_channel_order(commands.Cog, embeds):
     @commands.command("sync")
     @commands.has_permissions(manage_guild=True)
     async def sync_server(self, ctx):
+        """
+        syncs current channel order with saved channel order.
+        :param ctx:
+        :return:
+        """
         if ctx.guild.id != 774820103459700736:
             raise Exception("This command is not supported in this guild.")
 
@@ -119,6 +125,10 @@ class repair_channel_order(commands.Cog, embeds):
 
     @tasks.loop(hours=12)
     async def repair_channel_order(self):
+        """
+        Loop task to update all the channel settings.
+        :return:
+        """
         self.client.console.info_log(f"Repairing channel order task begin.")
         with open("./data/configuration/channels.json", "r+") as channels_file:
             # confirm no new channels/categories have been added.
@@ -143,7 +153,7 @@ class repair_channel_order(commands.Cog, embeds):
 
                     if channel:
                         srcp = channel.position
-
+                        # logging
                         src = f"```fix\nChannel Name: {channel.name}\nChannel Category: {channel.category}\nChannel ID: {channel.id}\nChannel Position: {channel.position}```"
                         await channel.edit(position=chdata[1], category=category)
                         dst = f"```fix\nChannel Name: {channel.name}\nChannel Category: {channel.category}\nChannel ID: {channel.id}\nChannel Position: {channel.position}```"

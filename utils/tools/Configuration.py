@@ -4,6 +4,10 @@ from nextcord.ext.commands import CommandError
 
 
 class configuration:
+    """
+    Handles configuration of the bot. All of this data is serialized using Pickle and is loaded in when the bot starts.
+    the pkl file contains all the data here in the class, and also the added fields from the guild configuration.
+    """
     def __init__(self):
         self.prefix = "!"
         self.token = "ODQyODc2ODEyMTIwMTYyMzc0.YJ7sMw.KyYZce9QlKPcsq7F3qoItwfLLGk"

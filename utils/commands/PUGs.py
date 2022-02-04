@@ -172,6 +172,11 @@ class role_select_view(nextcord.ui.View):
 
 
 class pugs(commands.Cog, embeds):
+
+    """
+    Manages PUGs. This section is undocumented. See ./tools/PugTools for more details.
+    """
+
     def __init__(self, client):
         self.client = client
         self.session: PugSession = None

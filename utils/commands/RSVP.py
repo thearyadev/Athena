@@ -101,12 +101,23 @@ class rsvp_options(nextcord.ui.View):
 
 
 class rsvp(commands.Cog, embeds):
+    """
+    creates rsvp notifications
+    """
+
     def __init__(self, client):
         self.client = client
 
     @commands.command(name="amr")
     @commands.has_permissions(manage_guild=True)
     async def add_mentionable_role(self, ctx, role: nextcord.Role):
+
+        """
+        adds a mentionable role to the list of mentionable roles for each guild.
+        :param ctx:
+        :param role:
+        :return:
+        """
         guild = self.client.configs.find_guild(ctx.guild.id)
         if "mentionable" in guild.__dict__.keys():
             if len(guild.mentionable) < 25:
@@ -124,6 +135,13 @@ class rsvp(commands.Cog, embeds):
     @commands.command()
     @commands.has_permissions(manage_guild=True)
     async def rsvp(self, ctx, channel: nextcord.TextChannel, *title):
+        """
+        sends notification to specified channel
+        :param ctx:
+        :param channel:
+        :param title:
+        :return:
+        """
 
         try:
             roles = list()
@@ -154,4 +172,3 @@ class rsvp(commands.Cog, embeds):
         announcement = await channel.send(role.mention, view=view, embed=embed)
         await announcement.edit("")
         self.client.console.info_log(f"RSVP '{' '.join(title)}' created and sent.")
-

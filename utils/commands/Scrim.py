@@ -131,6 +131,11 @@ class ConfirmLog(nextcord.ui.View):
 
 
 class scrim(commands.Cog, embeds):
+    """
+    User prompts for adding scrims to the scrim log, and getting the full scrim log.
+    """
+
+
     def __init__(self, client):
         self.client = client
         self.scrim_log = ScrimLogs("./data/scrims/", valid_maps=self.client.configs.valid_maps)

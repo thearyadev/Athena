@@ -3,9 +3,12 @@ from datetime import datetime
 
 
 class Console(rich_console):
+    """
+    Uses rich.console.Console() to make standardized logging for the bot.
+    """
     def __init__(self):
         super().__init__(log_time=False, log_path=False)
-        self.root_console = super(self.__class__, self)
+        self.root_console = super(self.__class__, self) # accessible if the original console is required.
 
     def server_log(self, *objects):
         self.log(
