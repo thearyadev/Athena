@@ -105,6 +105,7 @@ class rsvp(commands.Cog, embeds):
         self.client = client
 
     @commands.command(name="amr")
+    @commands.has_permissions(manage_guild=True)
     async def add_mentionable_role(self, ctx, role: nextcord.Role):
         guild = self.client.configs.find_guild(ctx.guild.id)
         if "mentionable" in guild.__dict__.keys():
@@ -121,6 +122,7 @@ class rsvp(commands.Cog, embeds):
         await ctx.send(embed=embed)
 
     @commands.command()
+    @commands.has_permissions(manage_guild=True)
     async def rsvp(self, ctx, channel: nextcord.TextChannel, *title):
 
         try:

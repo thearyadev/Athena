@@ -12,7 +12,6 @@ class ScrimLogs:
         self.valid_maps = valid_maps
         self.load_sheets()
 
-
     def load_sheets(self):
         for log_sheet_path in self.csv_paths:
             self.log.append(TeamScrim(log_sheet_path, self.valid_maps))
@@ -27,7 +26,6 @@ class ScrimLogs:
             self.csv_paths.append(f"{self.root_path}{name}.csv")
         self.log = []
         self.load_sheets()
-
 
     def log_scrim(self, team_name, date, contact, replays: dict):
         for team in self.log:
@@ -89,4 +87,3 @@ if __name__ == "__main__":
     log = ScrimLogs("../static/logs/scrims/")
     for team in log.log:
         print(team.team_name)
-

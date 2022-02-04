@@ -19,7 +19,7 @@ class Dropdown(nextcord.ui.Select):
 
     def __init__(self):
         options = [
-            nextcord.SelectOption(label=filename, description=None) for filename in os.listdir("./static/media")
+            nextcord.SelectOption(label=filename, description=None) for filename in os.listdir("./data/media")
         ]
         super().__init__(placeholder='Select a category', min_values=1, max_values=1, options=options)
 

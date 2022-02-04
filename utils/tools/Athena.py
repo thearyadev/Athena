@@ -78,3 +78,6 @@ class Athena(commands.Bot, ABC):
         from ..commands.PUGs import pugs
         self.add_cog(pugs(self))
         self.console.info_log("Loaded Module 'pugs'")
+        from ..commands.AdminConfigs import admin_configs
+        self.add_cog(admin_configs(self))
+        self.console.info_log("Loaded module 'admin_configs'")

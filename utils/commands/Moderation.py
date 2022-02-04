@@ -12,6 +12,7 @@ class moderation(commands.Cog, embeds):
         self.client = client
 
     @commands.command("archive")
+    @commands.has_permissions(manage_guild=True)
     async def create_channel_history_archive(self, ctx, amount: int, channel: nextcord.TextChannel = None):
         async with ctx.channel.typing():
             if not channel: channel = ctx.channel

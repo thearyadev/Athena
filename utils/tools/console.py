@@ -4,7 +4,7 @@ from datetime import datetime
 
 class Console(rich_console):
     def __init__(self):
-        super().__init__(log_time=False, )
+        super().__init__(log_time=False, log_path=False)
         self.root_console = super(self.__class__, self)
 
     def server_log(self, *objects):
@@ -22,12 +22,3 @@ class Console(rich_console):
     @staticmethod
     def __get_time__():
         return datetime.now().strftime('%H:%M:%S')
-
-
-if __name__ == "__main__":
-    console = Console()
-    console.server_log("hello world")
-    console.info_log("hello world")
-    console.error_log("hello world")
-
-    console.root_console.log("hi")

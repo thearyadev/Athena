@@ -39,7 +39,11 @@ class repair_channel_order(commands.Cog, embeds):
         self.log_channel = None
 
     @commands.command("sync")
+    @commands.has_permissions(manage_guild=True)
     async def sync_server(self, ctx):
+        if ctx.guild.id != 774820103459700736:
+            raise Exception("This command is not supported in this guild.")
+
         self.client.console.info_log("Server sync requested.")
         with open("./data/configuration/channels.json", "r+") as channels_file:
             data = {}
@@ -62,8 +66,10 @@ class repair_channel_order(commands.Cog, embeds):
         self.client.console.info_log(f"Synced config file with server order.")
 
     @commands.command("repair")
+    @commands.has_permissions(manage_guild=True)
     async def repair_prompts(self, ctx, args="start"):
-
+        if ctx.guild.id != 774820103459700736:
+            raise Exception("This command is not supported in this guild.")
         if args not in ('start', 'stop'): raise ValueError("Invalid arguments. Please enter start or stop.")
 
         if args == "start":
@@ -179,6 +185,7 @@ class repair_channel_order(commands.Cog, embeds):
         self.client.console.info_log("Repair Task has completed.")
 
     @commands.command("repairlog")
+    @commands.has_permissions(manage_guild=True)
     async def repair_log(self, ctx):
         with open("./data/logs/move.json", "r") as logfile:
             data = json.load(logfile)
