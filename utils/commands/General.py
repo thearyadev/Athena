@@ -51,12 +51,14 @@ class general(commands.Cog, embeds):
         """
 
         embed = nextcord.Embed(title="Hi! My name is Athena.",
-                               description="Hi. I'm Athena, "
+                               description="I'm Athena, "
                                            "I am bot designed to help with team management, "
                                            "discord server moderation, and event management.\n Use `!help` to "
                                            "see my commands. ",
                                color=self.SUCCESS)
-        embed.add_field(name="Version", value=f"**{self.client.configs.version}**", inline=True)
+        embed.set_image(url="https://raw.githubusercontent.com/thearyadev/Athena/main/graphics/athena.png")
+        embed.set_thumbnail(url=self.client.user.display_avatar)
+        embed.add_field(name="Version", value=f"{self.client.configs.version}", inline=True)
         embed.add_field(name="Date of last upgrade", value=self.client.configs.upgrade_date, inline=True)
 
         await ctx.send(embed=embed)
@@ -87,4 +89,10 @@ class general(commands.Cog, embeds):
             else:
                 raise ValueError(f"Invalid command category: '{category}'")
 
+    @commands.command()
+    async def setratioemoji(self, ctx, emoji: nextcord.Emoji):
+        guild = self.client.configs.find_guild(ctx.guild.id)
+        guild.ratio_emoji = emoji.id
+        self.client.configs.refresh()
+        await ctx.message.add_reaction(emoji=emoji)
 

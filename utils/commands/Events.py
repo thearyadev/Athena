@@ -34,7 +34,7 @@ class events(commands.Cog, embeds):
         try:
             self.client.console.info_log(
                 f"Command Executed: '{ctx.command.name}' by {ctx.author.name}#{ctx.author.discriminator} in {ctx.guild.name}")
-        except AttributeError: # raises attribute error if the channel is a DM channel.
+        except AttributeError:  # raises attribute error if the channel is a DM channel.
             self.client.console.info_log(
                 f"Command Executed: '{ctx.command.name}' by {ctx.author.name}#{ctx.author.discriminator} in DM_CHANNEL")
 
@@ -49,3 +49,13 @@ class events(commands.Cog, embeds):
         self.client.configs.add_guild(guild.id)
         self.client.configs.refresh()
         self.client.console.info_log(f"Guild: {guild.id} successfully joined.")
+
+    @commands.Cog.listener()
+    async def on_message(self, message):
+        try:
+            if "ratio" in message.content.lower():
+                if hasattr(guild := self.client.configs.find_guild(message.guild.id), "ratio_emoji"):
+                    await message.add_reaction(emoji=nextcord.utils.get(message.guild.emojis, id=guild.ratio_emoji))
+                    self.client.console.info_log(f"Reacted ratio on message in {message.guild.name}")
+        except Exception as e:
+            print(e)
