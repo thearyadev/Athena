@@ -8,7 +8,7 @@ RUN pip install -r requirements.txt
 COPY . .
 RUN apt-get update
 RUN apt-get install nano
-RUN apt-get install iputils-ping
-RUN apt-get install net-tools
+RUN apt-get install -y iputils-ping
+RUN apt-get install -y net-tools
 
 CMD ["python3", "./main.py"]
