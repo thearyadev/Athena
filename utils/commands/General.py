@@ -27,10 +27,10 @@ class general(commands.Cog, embeds):
                 return True  # does not apply to DM channels from the bot owner.
 
         if "configure_manual" in ctx.message.content:
-            return True # does not apply if the bot owner is trying to configure the bot
+            return True  # does not apply if the bot owner is trying to configure the bot
 
         if ctx.message.author.id == 305024830758060034 and "authorize" in ctx.message.content:
-            return True # does not apply if the bot owner is trying to authorize the bot
+            return True  # does not apply if the bot owner is trying to authorize the bot
 
         if "authorized" in self.client.configs.find_guild(ctx.guild.id).__dict__.keys():
             # does checks for the authorized state, raises an error if unauthorized.
@@ -61,12 +61,30 @@ class general(commands.Cog, embeds):
 
         await ctx.send(embed=embed)
 
-    @commands.command("command")
-    async def command_list(self, ctx):
+    @commands.command("help")
+    async def help(self, ctx, category=None):
         """
-        command line output of commands list.
+        :param category:
         :param ctx:
         :return:
         """
-        for command in self.client.walk_commands():
-            print(command.name)
+        if not category:
+            await ctx.send(file=nextcord.File("./graphics/help.png"))
+        else:
+            category = category.lower()
+            if category == "collections":
+                await ctx.send(file=nextcord.File("./graphics/collections.png"))
+            elif category == "moderation":
+                await ctx.send(file=nextcord.File("./graphics/moderation.png"))
+            elif category == "pugs":
+                await ctx.send(file=nextcord.File("./graphics/pugs.png"))
+            elif category == "general":
+                await ctx.send(file=nextcord.File("./graphics/general.png"))
+            elif category == "rsvp":
+                await ctx.send(file=nextcord.File("./graphics/rsvp.png"))
+            elif category == "scrim":
+                await ctx.send(file=nextcord.File("./graphics/scrim.png"))
+            else:
+                raise ValueError(f"Invalid command category: '{category}'")
+
+

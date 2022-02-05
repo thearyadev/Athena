@@ -18,7 +18,7 @@ server.initialize(mode="-d")
 
 
 This will update the serialized configuration file to hold your token, and will not need to be put in the code again unless the token changes.
-
+4. Proceed to Docker section
 ## Docker
 ```bash
 cd ./athena-v4/

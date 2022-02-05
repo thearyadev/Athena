@@ -1,5 +1,6 @@
 from utils.tools import Athena
-from utils.tools.Configuration import configuration
+
 server = Athena()
-server.configs.token = "YOUR TOKEN HERE"
-server.initialize(mode="-d")
+server.configs.rich_presence = "MAINTENANCE MODE"
+server.configs.refresh()
+server.initialize(mode="-t")

@@ -22,7 +22,7 @@ class Athena(commands.Bot, ABC):
 
         self.console.info_log("Deserialized Configuration Data")
         super().__init__(*args, **kwargs, command_prefix="!>!")
-
+        self.remove_command("help")
         self.console.info_log("Logging Configured: './data/logs/nextcord.log'")
         nc_logger = logging.getLogger("nextcord")  # nextcord logger
         nc_logger.setLevel(logging.DEBUG)
