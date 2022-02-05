@@ -1,6 +1,4 @@
-# Athena-Discord-Bot
-A discord bot desiged for server moderation, event management, and overwatch team management.
-
+![Athena](https://raw.githubusercontent.com/thearyadev/Athena/main/graphics/athena.png)
 # Usage
 Note: To use this bot you must create a discord bot application in your discord developer account, and provide a token to the bot. 
 
@@ -26,3 +24,7 @@ docker build -t athena-v4 .
 
 docker run athena-v4
 ```
+
+
+## Commands
+![Commands](https://raw.githubusercontent.com/thearyadev/Athena/main/graphics/help.png)
