@@ -53,14 +53,14 @@ class general(commands.Cog, embeds):
         embed = nextcord.Embed(title="Hi! My name is Athena.",
                                description="I'm Athena, "
                                            "I am bot designed to help with team management, "
-                                           "discord server moderation, and event management.\n Use `!help` to "
-                                           "see my commands. ",
+                                           "discord server moderation, and event management.",
                                color=self.SUCCESS)
+        embed.url = "https://github.com/thearyadev/athena"
         embed.set_image(url="https://raw.githubusercontent.com/thearyadev/Athena/main/graphics/athena.png")
         embed.set_thumbnail(url=self.client.user.display_avatar)
         embed.add_field(name="Version", value=f"{self.client.configs.version}", inline=True)
         embed.add_field(name="Date of last upgrade", value=self.client.configs.upgrade_date, inline=True)
-
+        embed.set_footer(text="Use `!help` to see my commands.")
         await ctx.send(embed=embed)
 
     @commands.command("help")
@@ -95,4 +95,3 @@ class general(commands.Cog, embeds):
         guild.ratio_emoji = emoji.id
         self.client.configs.refresh()
         await ctx.message.add_reaction(emoji=emoji)
-

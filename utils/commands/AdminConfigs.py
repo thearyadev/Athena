@@ -7,6 +7,7 @@ import sys
 from uuid import uuid4
 import shutil
 import asyncio
+from . import general
 
 
 class admin_configs(commands.Cog, embeds):
@@ -23,7 +24,7 @@ class admin_configs(commands.Cog, embeds):
     async def version(self, ctx, *new_version):
         if new_version:
             self.client.configs.version = " ".join(new_version)
-            await ctx.send("Version updated to " + " ".join(new_version))
+            await general.athena(context=self, ctx=ctx)
         else:
             raise ValueError("No version provided")
 
@@ -33,7 +34,7 @@ class admin_configs(commands.Cog, embeds):
     async def upgrade_date(self, ctx, *new_date):
         if new_date:
             self.client.configs.version = " ".join(new_date)
-            await ctx.send("Version updated to " + " ".join(new_date))
+            await general.athena(context=self, ctx=ctx)
         else:
             raise ValueError("No date provided")
 

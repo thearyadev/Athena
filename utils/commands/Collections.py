@@ -42,21 +42,23 @@ class collections(commands.Cog, embeds):
 
     def __init__(self, client):
         self.client = client
-        self.media_path = "./data/media/" # media path
+        self.media_path = "./data/media/"  # media path
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        if message.content.startswith(self.client.configs.prefix): # if the user used the command prefix
-            if message.author != self.client.user: # and the user is not the bot
-                queries = os.listdir(self.media_path) # get a list of all the categories
-                if message.content.replace(self.client.configs.prefix, "") in queries: # if their request is a valid folder
-                    try: # try except in case the folder is empty
+        if message.content.startswith(self.client.configs.prefix):  # if the user used the command prefix
+            if message.author != self.client.user:  # and the user is not the bot
+                queries = os.listdir(self.media_path)  # get a list of all the categories
+                if message.content.replace(self.client.configs.prefix,
+                                           "") in queries:  # if their request is a valid folder
+                    try:  # try except in case the folder is empty
                         self.client.console.info_log(
                             f"Command Executed: '{message.content.replace('!', '')}' by {message.author} in {message.guild}")
-                        await message.channel.send(file=nextcord.File( # pick a random file from the folder, and send it.
-                            self.media_path + message.content.replace(self.client.configs.prefix, "") + "/" +
-                            random.sample(os.listdir(
-                                self.media_path + message.content.replace(self.client.configs.prefix, "")), 1)[0]))
+                        await message.channel.send(
+                            file=nextcord.File(  # pick a random file from the folder, and send it.
+                                self.media_path + message.content.replace(self.client.configs.prefix, "") + "/" +
+                                random.sample(os.listdir(
+                                    self.media_path + message.content.replace(self.client.configs.prefix, "")), 1)[0]))
                         self.client.console.info_log(
                             f"Media sent from collection {message.content.replace(self.client.configs.prefix, '')}")
                     except ValueError:

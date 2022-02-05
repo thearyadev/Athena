@@ -4,6 +4,8 @@ from nextcord.ext.commands import CommandNotFound
 import traceback
 from ..tools.Embeds import embeds
 from ..commands.RSVP import rsvp_options
+import sys
+import io
 
 
 class events(commands.Cog, embeds):
@@ -59,3 +61,10 @@ class events(commands.Cog, embeds):
                     self.client.console.info_log(f"Reacted ratio on message in {message.guild.name}")
         except Exception as e:
             print(e)
+
+    def stderr(self, *args, **kwargs):
+        print(args, kwargs)
+
+    @commands.command("err")
+    async def err_sample(self, ctx):
+        raise Exception("your mom")

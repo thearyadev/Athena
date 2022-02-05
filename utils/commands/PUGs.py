@@ -17,6 +17,7 @@ class TeamPromptView(nextcord.ui.View):
 
     @nextcord.ui.button(label="Start Round", style=nextcord.ButtonStyle.green)
     async def start_round(self, button: nextcord.ui.button, interaction: nextcord.Interaction):
+
         if interaction.user == self.session.lobby_manager:
             self.regenerate_teams.disabled = True
             button.disabled = True
@@ -24,6 +25,8 @@ class TeamPromptView(nextcord.ui.View):
             embed = self.prompt.embeds[0]
             embed.color = embeds.SUCCESS
             await interaction.response.edit_message(view=self, embed=embed)
+            await interaction.channel.send("Starting round...")
+
             self.stop()
             m = self.session.map_pick
             if m:
@@ -85,16 +88,9 @@ class PugSessionManagerTools(nextcord.ui.View):
                 if user == self.client.user:
                     await user.edit(mute=True)
 
-    @nextcord.ui.button(label="Suspend Player", style=nextcord.ButtonStyle.blurple)
-    async def suspend_player(self, button: nextcord.ui.button, interaction: nextcord.Interaction):
-        pass
-
-    @nextcord.ui.button(label="Unsuspend Player", style=nextcord.ButtonStyle.blurple)
-    async def unsuspend_player(self, button: nextcord.ui.button, interaction: nextcord.Interaction):
-        pass
-
     @nextcord.ui.button(label="End Round", style=nextcord.ButtonStyle.blurple)
     async def return_to_lobby(self, button: nextcord.ui.button, interaction: nextcord.Interaction):
+        await interaction.response.send_message("Moving all users. ")
         if self.session and interaction.user == self.session.lobby_manager:
             for user in self.session.team1_voice.members:
                 await user.move_to(self.session.lobby_voice)
@@ -109,58 +105,71 @@ class role_select_view(nextcord.ui.View):
         super().__init__()
         self.roles = []
         self.src_message: nextcord.Message = None
+        self.sender: nextcord.Member = None
 
     @nextcord.ui.button(label="Tank", style=nextcord.ButtonStyle.blurple)
     async def tank(self, button: nextcord.ui.button, interaction: nextcord.Interaction):
+        if interaction.user == self.sender:
+            if "flex" in self.roles: self.roles.remove("flex")
 
-        if "flex" in self.roles: self.roles.remove("flex")
-
-        if "tank" in self.roles:
-            self.roles.remove("tank")
+            if "tank" in self.roles:
+                self.roles.remove("tank")
+            else:
+                self.roles.append("tank")
+            await self.update_prompt()
         else:
-            self.roles.append("tank")
-        await self.update_prompt()
+            await self.throw_error(interaction)
 
     @nextcord.ui.button(label="DPS", style=nextcord.ButtonStyle.blurple)
     async def dps(self, button: nextcord.ui.button, interaction: nextcord.Interaction):
-        if "flex" in self.roles: self.roles.remove("flex")
-        if "dps" in self.roles:
-            self.roles.remove("dps")
+        if interaction.user == self.sender:
+            if "flex" in self.roles: self.roles.remove("flex")
+            if "dps" in self.roles:
+                self.roles.remove("dps")
+            else:
+                self.roles.append("dps")
+            await self.update_prompt()
         else:
-            self.roles.append("dps")
-        await self.update_prompt()
+            await self.throw_error(interaction)
 
     @nextcord.ui.button(label="Support", style=nextcord.ButtonStyle.blurple)
     async def support(self, button: nextcord.ui.button, interaction: nextcord.Interaction):
-        if "flex" in self.roles: self.roles.remove("flex")
-        if "support" in self.roles:
-            self.roles.remove("support")
+        if interaction.user == self.sender:
+            if "flex" in self.roles: self.roles.remove("flex")
+            if "support" in self.roles:
+                self.roles.remove("support")
+            else:
+                self.roles.append("support")
+            await self.update_prompt()
         else:
-            self.roles.append("support")
-        await self.update_prompt()
+            await self.throw_error(interaction)
 
     @nextcord.ui.button(label="Flex", style=nextcord.ButtonStyle.blurple)
     async def flex(self, button: nextcord.ui.button, interaction: nextcord.Interaction):
+        if interaction.user == self.sender:
+            if "flex" in self.roles:
+                self.roles.remove("flex")
+            else:
+                self.roles = []
+                self.roles.append("flex")
 
-        if "flex" in self.roles:
-            self.roles.remove("flex")
+            await self.update_prompt()
         else:
-            self.roles = []
-            self.roles.append("flex")
-
-        await self.update_prompt()
+            await self.throw_error(interaction)
 
     @nextcord.ui.button(label="Confirm Selections", style=nextcord.ButtonStyle.green)
     async def confirm(self, button: nextcord.ui.button, interaction: nextcord.Interaction):
-
-        if self.roles:
-            embed = self.src_message.embeds[0]
-            embed.color = embeds.SUCCESS
-            await self.src_message.edit(embed=embed)
-            await interaction.response.send_message(f"Your role selection has been submitted.", ephemeral=True)
-            self.stop()
+        if interaction.user == self.sender:
+            if self.roles:
+                embed = self.src_message.embeds[0]
+                embed.color = embeds.SUCCESS
+                await self.src_message.edit(embed=embed)
+                await interaction.response.send_message(f"Your role selection has been submitted.", ephemeral=True)
+                self.stop()
+            else:
+                await interaction.response.send_message(f"You did not select a role.", ephemeral=True)
         else:
-            await interaction.response.send_message(f"You did not select a role.", ephemeral=True)
+            await self.throw_error(interaction)
 
     async def update_prompt(self):
         embed: nextcord.Embed = self.src_message.embeds[0]
@@ -170,9 +179,12 @@ class role_select_view(nextcord.ui.View):
             embed.set_field_at(0, name="Roles Selected", value="____")
         await self.src_message.edit(embed=embed)
 
+    @staticmethod
+    async def throw_error(interaction):
+        await interaction.response.send_message("This prompt is not yours.", ephemeral=True)
+
 
 class pugs(commands.Cog, embeds):
-
     """
     Manages PUGs. This section is undocumented. See ./tools/PugTools for more details.
     """
@@ -293,6 +305,7 @@ class pugs(commands.Cog, embeds):
 
             embed.add_field(name="Roles Selected", value="____")
             role_view.src_message = await ctx.send(embed=embed)
+            role_view.sender = ctx.author
             await role_view.src_message.edit(view=role_view)
             await role_view.wait()
             await role_view.src_message.edit(view=None)

@@ -8,6 +8,8 @@ from ..commands.RSVP import rsvp_options
 from ..tools.Configuration import configuration
 import sys
 from .console import Console
+from .STDERRredirect import Redirect
+
 
 
 class Athena(commands.Bot, ABC):
@@ -34,6 +36,7 @@ class Athena(commands.Bot, ABC):
         self.persistent_views_added = False
         self.__load_extensions__()  # loads extensions
         self.console.info_log(f"Cogs loaded successfully")
+        sys.stderr = Redirect(file_path="./data/logs/errors.log", print=False, console=self.console)
 
     async def on_ready(self):
         if not self.persistent_views_added:
