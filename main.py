@@ -3,9 +3,8 @@ from utils.tools import Athena
 
 def main():
     server = Athena()
-    server.configs.rich_presence = "MAINTENANCE MODE"
-    server.configs.refresh()
-    server.initialize(mode="-t")
+    server.configs.token = "YOUR TOKEN HERE"
+    server.initialize(mode="-d")
 
 
 if __name__ == '__main__':
