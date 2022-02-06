@@ -20,7 +20,7 @@ This will update the serialized configuration file to hold your token, and will 
 ## Docker
 ```bash
 cd ./athena-v4/
-docker build -t thearyadev/athena:4.0.5 .
+docker build -t thearyadev/athena:4.0.6 .
 
 docker run athena-v4
 ```
