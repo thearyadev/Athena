@@ -35,7 +35,7 @@ class admin_configs(commands.Cog, embeds):
     @commands.dm_only()
     async def upgrade_date(self, ctx, *new_date):
         if new_date:
-            self.client.configs.version = " ".join(new_date)
+            self.client.configs.upgrade_date = " ".join(new_date)
             await general.athena(context=self, ctx=ctx)
         else:
             raise ValueError("No date provided")
@@ -45,7 +45,7 @@ class admin_configs(commands.Cog, embeds):
     @commands.dm_only()
     async def prefix(self, ctx, *new_prefix):
         if new_prefix:
-            self.client.configs.version = " ".join(new_prefix)
+            self.client.configs.prefix = " ".join(new_prefix)
             await ctx.send("Version updated to " + " ".join(new_prefix))
         else:
             raise ValueError("No prefix provided")
