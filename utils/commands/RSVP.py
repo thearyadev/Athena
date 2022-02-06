@@ -104,7 +104,8 @@ class rsvp(commands.Cog, embeds):
     """
     creates rsvp notifications
     """
-
+    LOAD = True
+    NAME = "RSVP"
     def __init__(self, client):
         self.client = client
 

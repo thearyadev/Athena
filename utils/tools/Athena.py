@@ -10,6 +10,7 @@ import sys
 from .console import Console
 from .STDERRredirect import Redirect
 
+import inspect
 
 
 class Athena(commands.Bot, ABC):
@@ -25,7 +26,7 @@ class Athena(commands.Bot, ABC):
         self.console.info_log("Deserialized Configuration Data")
         super().__init__(*args, **kwargs, command_prefix="!>!")
         self.remove_command("help")
-        self.console.info_log("Logging Configured: './data/logs/nextcord.log'")
+        self.console.info_log("Logging Configured: ./data/logs/nextcord.log")
         nc_logger = logging.getLogger("nextcord")  # nextcord logger
         nc_logger.setLevel(logging.DEBUG)
         handler = logging.FileHandler(filename=r'./data/logs/nextcord.log', encoding='utf-8', mode='w')
@@ -37,6 +38,7 @@ class Athena(commands.Bot, ABC):
         self.__load_extensions__()  # loads extensions
         self.console.info_log(f"Cogs loaded successfully")
         sys.stderr = Redirect(file_path="./data/logs/errors.log", print=False, console=self.console)
+        self.console.info_log("__stderr__ redirected to ./data/logs/error.log")
 
     async def on_ready(self):
         if not self.persistent_views_added:
@@ -54,38 +56,19 @@ class Athena(commands.Bot, ABC):
             self.run(self.configs.token)
 
     def __load_extensions__(self):
-        """
-        Loads all nextcord Cogs into the main process.
-        :return:
-        """
+        from .. import commands
+        for name, extension in inspect.getmembers(commands):
+            if inspect.isclass(extension):
+                if hasattr(extension, "LOAD"):
+                    if extension.LOAD:
+                        self.add_cog(extension(self))
+                        if hasattr(extension, "NAME"):
+                            self.console.info_log(f"Loaded extension [yellow]>> {extension.NAME}[yellow]")
+                        else:
+                            self.console.info_log(f"Loaded extension [yellow]>> {name}[yellow]")
+                    else:
+                        self.console.info_log(f"Skipping module [red]>> {name}[red]")
+                else:
+                    self.console.error_log(f"Unknown module imported [red]>> {name}[red]")
 
-        from ..commands.Events import events
-        self.add_cog(events(self))
-        self.console.info_log("Loaded Module 'events'")
-        from ..commands.Errors import errors
-        self.add_cog(errors(self))
-        self.console.info_log("Loaded Module 'errors'")
-        from ..commands.Collections import collections
-        self.add_cog(collections(self))
-        self.console.info_log("Loaded Module 'collections'")
-        from ..commands.Moderation import moderation
-        self.add_cog(moderation(self))
-        self.console.info_log("Loaded Module 'moderation'")
-        from ..commands.General import general
-        self.add_cog(general(self))
-        self.console.info_log("Loaded Module 'general'")
-        from ..commands.RSVP import rsvp
-        self.add_cog(rsvp(self))
-        self.console.info_log("Loaded Module 'rsvp'")
-        from ..commands.RepairChannelOrder import repair_channel_order
-        self.add_cog(repair_channel_order(self))
-        self.console.info_log("Loaded Module 'repair_channel_order'")
-        from ..commands.Scrim import scrim
-        self.add_cog(scrim(self))
-        self.console.info_log("Loaded Module 'scrim'")
-        from ..commands.PUGs import pugs
-        self.add_cog(pugs(self))
-        self.console.info_log("Loaded Module 'pugs'")
-        from ..commands.AdminConfigs import admin_configs
-        self.add_cog(admin_configs(self))
-        self.console.info_log("Loaded module 'admin_configs'")
+

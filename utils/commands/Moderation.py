@@ -8,6 +8,8 @@ import os
 
 
 class moderation(commands.Cog, embeds):
+    LOAD = True
+    NAME = "Moderation"
     def __init__(self, client):
         self.client = client
 

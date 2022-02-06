@@ -12,7 +12,8 @@ class events(commands.Cog, embeds):
     """
     Nextcord events
     """
-
+    LOAD = True
+    NAME = "Events"
     def __init__(self, client):
         self.client = client
 

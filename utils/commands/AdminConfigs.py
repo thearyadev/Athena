@@ -14,6 +14,8 @@ class admin_configs(commands.Cog, embeds):
     """
     Admin config commands for the bot. Only works in DM channel from the bot owner.
     """
+    LOAD = True
+    NAME = "Admin Configs"
 
     def __init__(self, client):
         self.client = client

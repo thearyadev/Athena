@@ -31,6 +31,8 @@ class repair_channel_order(commands.Cog, embeds):
     Recursively reorders the channels according to a json file.
     Designed for starcity esports to fix a channel order problem
     """
+    LOAD = True
+    NAME = "Repair Channel Order"
 
     def __init__(self, client):
         super().__init__()

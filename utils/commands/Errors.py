@@ -10,7 +10,8 @@ class errors(commands.Cog, embeds):
     """
     Error handling & error output for discord.
     """
-
+    LOAD = True
+    NAME = "Errors"
     def __init__(self, client):
         self.client = client
 

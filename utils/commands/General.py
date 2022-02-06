@@ -10,6 +10,8 @@ import os
 
 
 class general(commands.Cog, embeds):
+    LOAD = True
+    NAME = "General"
     def __init__(self, client):
         self.client = client
         self.client.check(self.check_authorized)

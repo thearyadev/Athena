@@ -16,7 +16,6 @@ class Dropdown(nextcord.ui.Select):
     """
     Creates UI for folder selection
     """
-
     def __init__(self):
         options = [
             nextcord.SelectOption(label=filename, description=None) for filename in os.listdir("./data/media")
@@ -39,7 +38,8 @@ class collections(commands.Cog, embeds):
     Handles a folder system for storing images in different categories.
      Users can run a command and it will send a random image in the category they requested
     """
-
+    LOAD = True
+    NAME = "Collections"
     def __init__(self, client):
         self.client = client
         self.media_path = "./data/media/"  # media path

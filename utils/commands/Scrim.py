@@ -135,7 +135,8 @@ class scrim(commands.Cog, embeds):
     User prompts for adding scrims to the scrim log, and getting the full scrim log.
     """
 
-
+    LOAD = True
+    NAME = "Scrim"
     def __init__(self, client):
         self.client = client
         self.scrim_log = ScrimLogs("./data/scrims/", valid_maps=self.client.configs.valid_maps)
@@ -237,7 +238,3 @@ class scrim(commands.Cog, embeds):
             if team.team_name == team_view.dropdown.selection:
                 await ctx.reply("Please use a spreadsheet viewer to display this data.", file=nextcord.File(team.path))
                 return
-
-
-
-
