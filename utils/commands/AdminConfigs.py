@@ -8,6 +8,7 @@ from uuid import uuid4
 import shutil
 import asyncio
 from . import general
+from ..tools import Guild
 
 
 class admin_configs(commands.Cog, embeds):
@@ -68,7 +69,7 @@ class admin_configs(commands.Cog, embeds):
     @commands.dm_only()
     async def shutdown(self, ctx):
         await ctx.send("Shutting down")
-        self.client.configs.refresh()
+        self.client.database.connection.close()
         sys.exit(-1)
 
     @commands.command(name="gdd")
@@ -86,8 +87,9 @@ class admin_configs(commands.Cog, embeds):
     @commands.is_owner()
     async def authorize_bot_usage(self, ctx):
 
-        self.client.configs.find_guild(ctx.guild.id).authorized = True
-        self.client.configs.refresh()
+        guild = self.client.database.get(ctx.guild.id)
+        guild.authorized = True
+        self.client.database.update_guild(guild)
         embed = nextcord.Embed(title="Guild Authorization",
                                description="This guild has been authorized. All commands are now activated. ",
                                color=self.SUCCESS)
@@ -97,8 +99,9 @@ class admin_configs(commands.Cog, embeds):
     @commands.guild_only()
     @commands.is_owner()
     async def deactivate_bot_usage(self, ctx):
-        self.client.configs.find_guild(ctx.guild.id).authorized = False
-        self.client.configs.refresh()
+        guild = self.client.database.get(ctx.guild.id)
+        guild.authorized = False
+        self.client.database.update_guild(guild)
         embed = nextcord.Embed(title="Guild Authorization",
                                description="This guild has been unauthorized. All commands are now deactivated. ",
                                color=self.SUCCESS)
@@ -108,8 +111,10 @@ class admin_configs(commands.Cog, embeds):
     @commands.guild_only()
     @commands.is_owner()
     async def configure_manual(self, ctx):
+        self.client.database.add_guild(
+            Guild(_id=ctx.guild.id, authorized=False, mentionable=list(), ratio_emoji=0)
+        )
 
-        self.client.configs.add_guild(ctx.guild.id)
         embed = nextcord.Embed(title="Guild Configuration",
                                description="This guild has been configured.",
                                color=self.SUCCESS)

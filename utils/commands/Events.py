@@ -6,6 +6,7 @@ from ..tools.Embeds import embeds
 from ..commands.RSVP import rsvp_options
 import sys
 import io
+from ..tools import Guild
 
 
 class events(commands.Cog, embeds):
@@ -14,12 +15,14 @@ class events(commands.Cog, embeds):
     """
     LOAD = True
     NAME = "Events"
+
     def __init__(self, client):
         self.client = client
 
     @commands.Cog.listener()
     async def on_ready(self):
-        self.client.console.info_log(f"Connection to Discord successful. Athena has logged in as {self.client.user}")
+        self.client.console.info_log(
+            f"Connection to Discord successful. Athena has logged in as [green]{self.client.user}[/green]")
         await self.client.change_presence(
             status=nextcord.Status.dnd,
             activity=nextcord.Game(self.client.configs.rich_presence)
@@ -36,10 +39,10 @@ class events(commands.Cog, embeds):
         """
         try:
             self.client.console.info_log(
-                f"Command Executed: '{ctx.command.name}' by {ctx.author.name}#{ctx.author.discriminator} in {ctx.guild.name}")
+                f"Command Executed: '{ctx.command.name}' by [blue]{ctx.author.name}#{ctx.author.discriminator}[/blue] in {ctx.guild.name}")
         except AttributeError:  # raises attribute error if the channel is a DM channel.
             self.client.console.info_log(
-                f"Command Executed: '{ctx.command.name}' by {ctx.author.name}#{ctx.author.discriminator} in DM_CHANNEL")
+                f"Command Executed: '{ctx.command.name}' by [blue]{ctx.author.name}#{ctx.author.discriminator}[/blue] in DM_CHANNEL")
 
     @commands.Cog.listener()
     async def on_guild_join(self, guild):
@@ -49,22 +52,21 @@ class events(commands.Cog, embeds):
         :param guild:
         :return:
         """
-        self.client.configs.add_guild(guild.id)
-        self.client.configs.refresh()
-        self.client.console.info_log(f"Guild: {guild.id} successfully joined.")
+        g = Guild(_id=guild.id, authorized=False, mentionable=list(), ratio_emoji=0)
+        self.client.database.add_guild(
+        )
+        self.client.console.info_log(f"Guild: {g} successfully joined.")
 
     @commands.Cog.listener()
     async def on_message(self, message):
         try:
             if "ratio" in message.content.lower():
-                if hasattr(guild := self.client.configs.find_guild(message.guild.id), "ratio_emoji"):
-                    await message.add_reaction(emoji=nextcord.utils.get(message.guild.emojis, id=guild.ratio_emoji))
-                    self.client.console.info_log(f"Reacted ratio on message in {message.guild.name}")
+                if guild := self.client.database.get(message.guild.id):
+                    if guild.ratio_emoji:
+                        await message.add_reaction(emoji=nextcord.utils.get(message.guild.emojis, id=guild.ratio_emoji))
+                        self.client.console.info_log(f"Reacted ratio on message in {message.guild.name}")
         except Exception as e:
             print(e)
-
-    def stderr(self, *args, **kwargs):
-        print(args, kwargs)
 
     @commands.command("err")
     async def err_sample(self, ctx):

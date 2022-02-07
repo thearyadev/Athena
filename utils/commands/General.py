@@ -12,6 +12,7 @@ import os
 class general(commands.Cog, embeds):
     LOAD = True
     NAME = "General"
+
     def __init__(self, client):
         self.client = client
         self.client.check(self.check_authorized)
@@ -33,13 +34,12 @@ class general(commands.Cog, embeds):
 
         if ctx.message.author.id == 305024830758060034 and "authorize" in ctx.message.content:
             return True  # does not apply if the bot owner is trying to authorize the bot
+        guild = self.client.database.get(ctx.guild.id)
+        if guild is None:
+            raise CommandError(
+                "This server has not been configured. Please contact the bot owner to configure this server")
 
-        if "authorized" in self.client.configs.find_guild(ctx.guild.id).__dict__.keys():
-            # does checks for the authorized state, raises an error if unauthorized.
-            if not self.client.configs.find_guild(ctx.guild.id).__dict__['authorized']:
-                raise CommandError(
-                    "This server has not been authorized. Please contact the bot owner to authorize this server")
-        else:
+        elif not guild.authorized:
             raise CommandError(
                 "This server has not been authorized. Please contact the bot owner to authorize this server")
         return True
@@ -91,9 +91,3 @@ class general(commands.Cog, embeds):
             else:
                 raise ValueError(f"Invalid command category: '{category}'")
 
-    @commands.command()
-    async def setratioemoji(self, ctx, emoji: nextcord.Emoji):
-        guild = self.client.configs.find_guild(ctx.guild.id)
-        guild.ratio_emoji = emoji.id
-        self.client.configs.refresh()
-        await ctx.message.add_reaction(emoji=emoji)

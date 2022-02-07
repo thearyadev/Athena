@@ -9,6 +9,7 @@ from ..tools.Configuration import configuration
 import sys
 from .console import Console
 from .STDERRredirect import Redirect
+from .Database import GuildDatabase
 
 import inspect
 
@@ -22,7 +23,6 @@ class Athena(commands.Bot, ABC):
 
         self.console = Console()
         self.configs = configuration.deserialize("./data/configuration/config.pkl")  # loads config from serialized file
-
         self.console.info_log("Deserialized Configuration Data")
         super().__init__(*args, **kwargs, command_prefix="!>!")
         self.remove_command("help")
@@ -39,6 +39,7 @@ class Athena(commands.Bot, ABC):
         self.console.info_log(f"Cogs loaded successfully")
         sys.stderr = Redirect(file_path="./data/logs/errors.log", print=False, console=self.console)
         self.console.info_log("__stderr__ redirected to ./data/logs/error.log")
+        self.database: GuildDatabase = GuildDatabase("./data/guilds/guilds.db", console=self.console)
 
     async def on_ready(self):
         if not self.persistent_views_added:
@@ -70,5 +71,3 @@ class Athena(commands.Bot, ABC):
                         self.console.info_log(f"Skipping module [red]>> {name}[red]")
                 else:
                     self.console.error_log(f"Unknown module imported [red]>> {name}[red]")
-
-

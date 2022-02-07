@@ -1,1 +1,648 @@
 
+---------------------------------------------
+Task exception was never retrieved
+future: <Task finished name='nextcord: on_message' coro=<Client._run_event() done, defined at C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\client.py:413> exception=SystemExit(-1)>
+Traceback (most recent call last):
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\client.py", line 720, in run
+    loop.run_forever()
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\windows_events.py", line 316, in run_forever
+    super().run_forever()
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 595, in run_forever
+    self._run_once()
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 1881, in _run_once
+    handle._run()
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\client.py", line 415, in _run_event
+    await coro(*args, **kwargs)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\bot.py", line 1095, in on_message
+    await self.process_commands(message)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\bot.py", line 1092, in process_commands
+    await self.invoke(ctx)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\bot.py", line 1055, in invoke
+    await ctx.command.invoke(ctx)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\core.py", line 933, in invoke
+    await injected(*ctx.args, **ctx.kwargs)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\core.py", line 168, in wrapped
+    ret = await coro(*args, **kwargs)
+  File "C:\Users\Compu\Documents\Athena-V4\utils\commands\AdminConfigs.py", line 73, in shutdown
+    sys.exit(-1)
+SystemExit: -1
+Exception ignored in: <function _ProactorBasePipeTransport.__del__ at 0x00000122BEEDFD00>
+
+---------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\proactor_events.py", line 116, in __del__
+    self.close()
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\proactor_events.py", line 108, in close
+    self._loop.call_soon(self._call_connection_lost, None)
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 745, in call_soon
+    self._check_closed()
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 510, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+Exception ignored in sys.unraisablehook: <built-in function unraisablehook>
+AttributeError: 'Redirect' object has no attribute 'flush'
+C:\Users\Compu\Documents\Athena-V4\utils\commands\AdminConfigs.py:72: RuntimeWarning: coroutine 'BotBase.close' was never awaited
+  self.client.close()
+RuntimeWarning: Enable tracemalloc to get the object allocation traceback
+
+---------------------------------------------
+Task exception was never retrieved
+future: <Task finished name='nextcord: on_message' coro=<Client._run_event() done, defined at C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\client.py:413> exception=SystemExit(-1)>
+Traceback (most recent call last):
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\client.py", line 720, in run
+    loop.run_forever()
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\windows_events.py", line 316, in run_forever
+    super().run_forever()
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 595, in run_forever
+    self._run_once()
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 1881, in _run_once
+    handle._run()
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\client.py", line 415, in _run_event
+    await coro(*args, **kwargs)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\bot.py", line 1095, in on_message
+    await self.process_commands(message)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\bot.py", line 1092, in process_commands
+    await self.invoke(ctx)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\bot.py", line 1055, in invoke
+    await ctx.command.invoke(ctx)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\core.py", line 933, in invoke
+    await injected(*ctx.args, **ctx.kwargs)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\core.py", line 168, in wrapped
+    ret = await coro(*args, **kwargs)
+  File "C:\Users\Compu\Documents\Athena-V4\utils\commands\AdminConfigs.py", line 74, in shutdown
+    sys.exit(-1)
+SystemExit: -1
+Exception ignored in: <function _ProactorBasePipeTransport.__del__ at 0x0000018936A6FD00>
+
+---------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\proactor_events.py", line 116, in __del__
+    self.close()
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\proactor_events.py", line 108, in close
+    self._loop.call_soon(self._call_connection_lost, None)
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 745, in call_soon
+    self._check_closed()
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 510, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+Exception ignored in sys.unraisablehook: <built-in function unraisablehook>
+AttributeError: 'Redirect' object has no attribute 'flush'
+C:\Users\Compu\Documents\Athena-V4\utils\commands\AdminConfigs.py:72: RuntimeWarning: coroutine 'BotBase.close' was never awaited
+  self.client.close()
+RuntimeWarning: Enable tracemalloc to get the object allocation traceback
+
+---------------------------------------------
+Task exception was never retrieved
+future: <Task finished name='nextcord: on_message' coro=<Client._run_event() done, defined at C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\client.py:413> exception=SystemExit(-1)>
+Traceback (most recent call last):
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\client.py", line 720, in run
+    loop.run_forever()
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\windows_events.py", line 316, in run_forever
+    super().run_forever()
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 595, in run_forever
+    self._run_once()
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 1881, in _run_once
+    handle._run()
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\client.py", line 415, in _run_event
+    await coro(*args, **kwargs)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\bot.py", line 1095, in on_message
+    await self.process_commands(message)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\bot.py", line 1092, in process_commands
+    await self.invoke(ctx)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\bot.py", line 1055, in invoke
+    await ctx.command.invoke(ctx)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\core.py", line 933, in invoke
+    await injected(*ctx.args, **ctx.kwargs)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\core.py", line 168, in wrapped
+    ret = await coro(*args, **kwargs)
+  File "C:\Users\Compu\Documents\Athena-V4\utils\commands\AdminConfigs.py", line 74, in shutdown
+    sys.exit(-1)
+SystemExit: -1
+Exception ignored in: <function _ProactorBasePipeTransport.__del__ at 0x000002089B8DFD00>
+
+---------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\proactor_events.py", line 116, in __del__
+    self.close()
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\proactor_events.py", line 108, in close
+    self._loop.call_soon(self._call_connection_lost, None)
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 745, in call_soon
+    self._check_closed()
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 510, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+Exception ignored in sys.unraisablehook: <built-in function unraisablehook>
+AttributeError: 'Redirect' object has no attribute 'flush'
+Exception ignored in: <function _ProactorBasePipeTransport.__del__ at 0x000002089B8DFD00>
+
+---------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\proactor_events.py", line 116, in __del__
+    self.close()
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\proactor_events.py", line 108, in close
+    self._loop.call_soon(self._call_connection_lost, None)
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 745, in call_soon
+    self._check_closed()
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 510, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+Exception ignored in sys.unraisablehook: <built-in function unraisablehook>
+AttributeError: 'Redirect' object has no attribute 'flush'
+C:\Users\Compu\Documents\Athena-V4\utils\commands\AdminConfigs.py:73: RuntimeWarning: coroutine 'BotBase.close' was never awaited
+  self.client.close()
+RuntimeWarning: Enable tracemalloc to get the object allocation traceback
+C:\Users\Compu\Documents\Athena-V4\utils\commands\AdminConfigs.py:72: RuntimeWarning: coroutine 'BotBase.close' was never awaited
+  self.client.close()
+RuntimeWarning: Enable tracemalloc to get the object allocation traceback
+
+---------------------------------------------
+Task exception was never retrieved
+future: <Task finished name='nextcord: on_message' coro=<Client._run_event() done, defined at C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\client.py:413> exception=SystemExit(-1)>
+Traceback (most recent call last):
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\client.py", line 720, in run
+    loop.run_forever()
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\windows_events.py", line 316, in run_forever
+    super().run_forever()
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 595, in run_forever
+    self._run_once()
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 1881, in _run_once
+    handle._run()
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\client.py", line 415, in _run_event
+    await coro(*args, **kwargs)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\bot.py", line 1095, in on_message
+    await self.process_commands(message)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\bot.py", line 1092, in process_commands
+    await self.invoke(ctx)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\bot.py", line 1055, in invoke
+    await ctx.command.invoke(ctx)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\core.py", line 933, in invoke
+    await injected(*ctx.args, **ctx.kwargs)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\core.py", line 168, in wrapped
+    ret = await coro(*args, **kwargs)
+  File "C:\Users\Compu\Documents\Athena-V4\utils\commands\AdminConfigs.py", line 73, in shutdown
+    sys.exit(-1)
+SystemExit: -1
+Exception ignored in: <function _ProactorBasePipeTransport.__del__ at 0x00000252BBFAFD00>
+
+---------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\proactor_events.py", line 116, in __del__
+    self.close()
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\proactor_events.py", line 108, in close
+    self._loop.call_soon(self._call_connection_lost, None)
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 745, in call_soon
+    self._check_closed()
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 510, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+Exception ignored in sys.unraisablehook: <built-in function unraisablehook>
+AttributeError: 'Redirect' object has no attribute 'flush'
+
+
+---------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\core.py", line 758, in _parse_arguments
+    next(iterator)
+StopIteration
+
+During handling of the above exception, another exception occurred:
+
+---------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\client.py", line 415, in _run_event
+    await coro(*args, **kwargs)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\bot.py", line 1095, in on_message
+    await self.process_commands(message)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\bot.py", line 1092, in process_commands
+    await self.invoke(ctx)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\bot.py", line 1055, in invoke
+    await ctx.command.invoke(ctx)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\core.py", line 925, in invoke
+    await self.prepare(ctx)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\core.py", line 859, in prepare
+    await self._parse_arguments(ctx)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\core.py", line 760, in _parse_arguments
+    raise nextcord.ClientException(f'Callback for {self.name} command is missing "ctx" parameter.')
+nextcord.errors.ClientException: Callback for dobackup command is missing "ctx" parameter.
+
+
+---------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\core.py", line 758, in _parse_arguments
+    next(iterator)
+StopIteration
+
+During handling of the above exception, another exception occurred:
+
+---------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\client.py", line 415, in _run_event
+    await coro(*args, **kwargs)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\bot.py", line 1095, in on_message
+    await self.process_commands(message)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\bot.py", line 1092, in process_commands
+    await self.invoke(ctx)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\bot.py", line 1055, in invoke
+    await ctx.command.invoke(ctx)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\core.py", line 925, in invoke
+    await self.prepare(ctx)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\core.py", line 859, in prepare
+    await self._parse_arguments(ctx)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\core.py", line 760, in _parse_arguments
+    raise nextcord.ClientException(f'Callback for {self.name} command is missing "ctx" parameter.')
+nextcord.errors.ClientException: Callback for dobackup command is missing "ctx" parameter.
+
+
+---------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\client.py", line 415, in _run_event
+    await coro(*args, **kwargs)
+  File "C:\Users\Compu\Documents\Athena-V4\utils\commands\Events.py", line 56, in on_guild_join
+    self.client.database.add_guild(
+TypeError: GuildDatabase.add_guild() missing 1 required positional argument: 'guild'
+C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\core.py:168: RuntimeWarning: coroutine 'Client.fetch_user' was never awaited
+  ret = await coro(*args, **kwargs)
+RuntimeWarning: Enable tracemalloc to get the object allocation traceback
+
+
+---------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\core.py", line 758, in _parse_arguments
+    next(iterator)
+StopIteration
+
+During handling of the above exception, another exception occurred:
+
+---------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\client.py", line 415, in _run_event
+    await coro(*args, **kwargs)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\bot.py", line 1095, in on_message
+    await self.process_commands(message)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\bot.py", line 1092, in process_commands
+    await self.invoke(ctx)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\bot.py", line 1055, in invoke
+    await ctx.command.invoke(ctx)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\core.py", line 925, in invoke
+    await self.prepare(ctx)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\core.py", line 859, in prepare
+    await self._parse_arguments(ctx)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\core.py", line 760, in _parse_arguments
+    raise nextcord.ClientException(f'Callback for {self.name} command is missing "ctx" parameter.')
+nextcord.errors.ClientException: Callback for ca command is missing "ctx" parameter.
+
+
+---------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\core.py", line 758, in _parse_arguments
+    next(iterator)
+StopIteration
+
+During handling of the above exception, another exception occurred:
+
+---------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\client.py", line 415, in _run_event
+    await coro(*args, **kwargs)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\bot.py", line 1095, in on_message
+    await self.process_commands(message)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\bot.py", line 1092, in process_commands
+    await self.invoke(ctx)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\bot.py", line 1055, in invoke
+    await ctx.command.invoke(ctx)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\core.py", line 925, in invoke
+    await self.prepare(ctx)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\core.py", line 859, in prepare
+    await self._parse_arguments(ctx)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\core.py", line 760, in _parse_arguments
+    raise nextcord.ClientException(f'Callback for {self.name} command is missing "ctx" parameter.')
+nextcord.errors.ClientException: Callback for ca command is missing "ctx" parameter.
+
+
+---------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\core.py", line 758, in _parse_arguments
+    next(iterator)
+StopIteration
+
+During handling of the above exception, another exception occurred:
+
+---------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\client.py", line 415, in _run_event
+    await coro(*args, **kwargs)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\bot.py", line 1095, in on_message
+    await self.process_commands(message)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\bot.py", line 1092, in process_commands
+    await self.invoke(ctx)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\bot.py", line 1055, in invoke
+    await ctx.command.invoke(ctx)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\core.py", line 925, in invoke
+    await self.prepare(ctx)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\core.py", line 859, in prepare
+    await self._parse_arguments(ctx)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\commands\core.py", line 760, in _parse_arguments
+    raise nextcord.ClientException(f'Callback for {self.name} command is missing "ctx" parameter.')
+nextcord.errors.ClientException: Callback for ca command is missing "ctx" parameter.
+Unhandled exception in internal background task 'backup'.
+
+---------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\tasks\__init__.py", line 168, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\Compu\Documents\Athena-V4\utils\commands\Backup.py", line 36, in backup
+    archive = await self.create_archives()
+TypeError: Command.__call__() missing 1 required positional argument: 'context'
+Unhandled exception in internal background task 'backup'.
+
+---------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\tasks\__init__.py", line 168, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\Compu\Documents\Athena-V4\utils\commands\Backup.py", line 36, in backup
+    archive = await self.create_archives()
+TypeError: Command.__call__() missing 1 required positional argument: 'context'
+Unhandled exception in internal background task 'backup'.
+
+---------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\tasks\__init__.py", line 168, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\Compu\Documents\Athena-V4\utils\commands\Backup.py", line 36, in backup
+    archive = await self.create_archives()
+TypeError: Command.__call__() missing 1 required positional argument: 'context'
+Unhandled exception in internal background task 'backup'.
+
+---------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\tasks\__init__.py", line 168, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\Compu\Documents\Athena-V4\utils\commands\Backup.py", line 50, in backup
+    arya = await self.client.fetch_user(305024830758060034)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\client.py", line 1545, in fetch_user
+    data = await self.http.get_user(user_id)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\http.py", line 337, in request
+    raise HTTPException(response, data)
+nextcord.errors.HTTPException: 401 Unauthorized (error code: 0): 401: Unauthorized
+
+---------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\http.py", line 382, in static_login
+    data = await self.request(Route('GET', '/users/@me'))
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\http.py", line 337, in request
+    raise HTTPException(response, data)
+nextcord.errors.HTTPException: 401 Unauthorized (error code: 0): 401: Unauthorized
+
+The above exception was the direct cause of the following exception:
+
+---------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Compu\Documents\Athena-V4\main.py", line 17, in <module>
+    main()
+  File "C:\Users\Compu\Documents\Athena-V4\main.py", line 13, in main
+    server.initialize(mode="-t")
+  File "C:\Users\Compu\Documents\Athena-V4\utils\tools\Athena.py", line 54, in initialize
+    self.run(self.configs.testing_token)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\client.py", line 730, in run
+    return future.result()
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\client.py", line 709, in runner
+    await self.start(*args, **kwargs)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\client.py", line 672, in start
+    await self.login(token)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\client.py", line 540, in login
+    data = await self.http.static_login(token.strip())
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\http.py", line 386, in static_login
+    raise LoginFailure('Improper token has been passed.') from exc
+nextcord.errors.LoginFailure: Improper token has been passed.
+Exception ignored in: <function _ProactorBasePipeTransport.__del__ at 0x0000025B932BFEB0>
+
+---------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\proactor_events.py", line 116, in __del__
+    self.close()
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\proactor_events.py", line 108, in close
+    self._loop.call_soon(self._call_connection_lost, None)
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 745, in call_soon
+    self._check_closed()
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 510, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+Exception ignored in sys.unraisablehook: <built-in function unraisablehook>
+AttributeError: 'Redirect' object has no attribute 'flush'
+Exception ignored in: <function _ProactorBasePipeTransport.__del__ at 0x0000025B932BFEB0>
+
+---------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\proactor_events.py", line 116, in __del__
+    self.close()
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\proactor_events.py", line 108, in close
+    self._loop.call_soon(self._call_connection_lost, None)
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 745, in call_soon
+    self._check_closed()
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 510, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+Exception ignored in sys.unraisablehook: <built-in function unraisablehook>
+AttributeError: 'Redirect' object has no attribute 'flush'
+
+---------------------------------------------
+Task exception was never retrieved
+future: <Task finished name='Task-1' coro=<Loop._loop() done, defined at C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\tasks\__init__.py:151> exception=HTTPException('401 Unauthorized (error code: 0): 401: Unauthorized')>
+Traceback (most recent call last):
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\tasks\__init__.py", line 197, in _loop
+    raise exc
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\tasks\__init__.py", line 168, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\Compu\Documents\Athena-V4\utils\commands\Backup.py", line 50, in backup
+    arya = await self.client.fetch_user(305024830758060034)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\client.py", line 1545, in fetch_user
+    data = await self.http.get_user(user_id)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\http.py", line 337, in request
+    raise HTTPException(response, data)
+nextcord.errors.HTTPException: 401 Unauthorized (error code: 0): 401: Unauthorized
+Unhandled exception in internal background task 'backup'.
+
+---------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\tasks\__init__.py", line 168, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\Compu\Documents\Athena-V4\utils\commands\Backup.py", line 50, in backup
+    arya = await self.client.fetch_user(305024830758060034)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\client.py", line 1545, in fetch_user
+    data = await self.http.get_user(user_id)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\http.py", line 337, in request
+    raise HTTPException(response, data)
+nextcord.errors.HTTPException: 401 Unauthorized (error code: 0): 401: Unauthorized
+
+---------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\http.py", line 382, in static_login
+    data = await self.request(Route('GET', '/users/@me'))
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\http.py", line 337, in request
+    raise HTTPException(response, data)
+nextcord.errors.HTTPException: 401 Unauthorized (error code: 0): 401: Unauthorized
+
+The above exception was the direct cause of the following exception:
+
+---------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Compu\Documents\Athena-V4\main.py", line 18, in <module>
+    main()
+  File "C:\Users\Compu\Documents\Athena-V4\main.py", line 14, in main
+    server.initialize(mode="-t")
+  File "C:\Users\Compu\Documents\Athena-V4\utils\tools\Athena.py", line 54, in initialize
+    self.run(self.configs.testing_token)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\client.py", line 730, in run
+    return future.result()
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\client.py", line 709, in runner
+    await self.start(*args, **kwargs)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\client.py", line 672, in start
+    await self.login(token)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\client.py", line 540, in login
+    data = await self.http.static_login(token.strip())
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\http.py", line 386, in static_login
+    raise LoginFailure('Improper token has been passed.') from exc
+nextcord.errors.LoginFailure: Improper token has been passed.
+Exception ignored in: <function _ProactorBasePipeTransport.__del__ at 0x0000023348DEFEB0>
+
+---------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\proactor_events.py", line 116, in __del__
+    self.close()
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\proactor_events.py", line 108, in close
+    self._loop.call_soon(self._call_connection_lost, None)
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 745, in call_soon
+    self._check_closed()
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 510, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+Exception ignored in sys.unraisablehook: <built-in function unraisablehook>
+AttributeError: 'Redirect' object has no attribute 'flush'
+Exception ignored in: <function _ProactorBasePipeTransport.__del__ at 0x0000023348DEFEB0>
+
+---------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\proactor_events.py", line 116, in __del__
+    self.close()
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\proactor_events.py", line 108, in close
+    self._loop.call_soon(self._call_connection_lost, None)
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 745, in call_soon
+    self._check_closed()
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 510, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+Exception ignored in sys.unraisablehook: <built-in function unraisablehook>
+AttributeError: 'Redirect' object has no attribute 'flush'
+
+---------------------------------------------
+Task exception was never retrieved
+future: <Task finished name='Task-1' coro=<Loop._loop() done, defined at C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\tasks\__init__.py:151> exception=HTTPException('401 Unauthorized (error code: 0): 401: Unauthorized')>
+Traceback (most recent call last):
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\tasks\__init__.py", line 197, in _loop
+    raise exc
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\tasks\__init__.py", line 168, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\Compu\Documents\Athena-V4\utils\commands\Backup.py", line 50, in backup
+    arya = await self.client.fetch_user(305024830758060034)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\client.py", line 1545, in fetch_user
+    data = await self.http.get_user(user_id)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\http.py", line 337, in request
+    raise HTTPException(response, data)
+nextcord.errors.HTTPException: 401 Unauthorized (error code: 0): 401: Unauthorized
+Unhandled exception in internal background task 'backup'.
+
+---------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\tasks\__init__.py", line 168, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\Compu\Documents\Athena-V4\utils\commands\Backup.py", line 50, in backup
+    arya = await self.client.fetch_user(305024830758060034)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\client.py", line 1545, in fetch_user
+    data = await self.http.get_user(user_id)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\http.py", line 337, in request
+    raise HTTPException(response, data)
+nextcord.errors.HTTPException: 401 Unauthorized (error code: 0): 401: Unauthorized
+
+---------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\http.py", line 382, in static_login
+    data = await self.request(Route('GET', '/users/@me'))
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\http.py", line 337, in request
+    raise HTTPException(response, data)
+nextcord.errors.HTTPException: 401 Unauthorized (error code: 0): 401: Unauthorized
+
+The above exception was the direct cause of the following exception:
+
+---------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Compu\Documents\Athena-V4\main.py", line 15, in <module>
+    main()
+  File "C:\Users\Compu\Documents\Athena-V4\main.py", line 11, in main
+    server.initialize(mode="-t")
+  File "C:\Users\Compu\Documents\Athena-V4\utils\tools\Athena.py", line 54, in initialize
+    self.run(self.configs.testing_token)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\client.py", line 730, in run
+    return future.result()
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\client.py", line 709, in runner
+    await self.start(*args, **kwargs)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\client.py", line 672, in start
+    await self.login(token)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\client.py", line 540, in login
+    data = await self.http.static_login(token.strip())
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\http.py", line 386, in static_login
+    raise LoginFailure('Improper token has been passed.') from exc
+nextcord.errors.LoginFailure: Improper token has been passed.
+Exception ignored in: <function _ProactorBasePipeTransport.__del__ at 0x000001D83D3F3EB0>
+
+---------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\proactor_events.py", line 116, in __del__
+    self.close()
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\proactor_events.py", line 108, in close
+    self._loop.call_soon(self._call_connection_lost, None)
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 745, in call_soon
+    self._check_closed()
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 510, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+Exception ignored in sys.unraisablehook: <built-in function unraisablehook>
+AttributeError: 'Redirect' object has no attribute 'flush'
+Exception ignored in: <function _ProactorBasePipeTransport.__del__ at 0x000001D83D3F3EB0>
+
+---------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\proactor_events.py", line 116, in __del__
+    self.close()
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\proactor_events.py", line 108, in close
+    self._loop.call_soon(self._call_connection_lost, None)
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 745, in call_soon
+    self._check_closed()
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 510, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+Exception ignored in sys.unraisablehook: <built-in function unraisablehook>
+AttributeError: 'Redirect' object has no attribute 'flush'
+
+---------------------------------------------
+Task exception was never retrieved
+future: <Task finished name='Task-1' coro=<Loop._loop() done, defined at C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\tasks\__init__.py:151> exception=HTTPException('401 Unauthorized (error code: 0): 401: Unauthorized')>
+Traceback (most recent call last):
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\tasks\__init__.py", line 197, in _loop
+    raise exc
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\ext\tasks\__init__.py", line 168, in _loop
+    await self.coro(*args, **kwargs)
+  File "C:\Users\Compu\Documents\Athena-V4\utils\commands\Backup.py", line 50, in backup
+    arya = await self.client.fetch_user(305024830758060034)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\client.py", line 1545, in fetch_user
+    data = await self.http.get_user(user_id)
+  File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\http.py", line 337, in request
+    raise HTTPException(response, data)
+nextcord.errors.HTTPException: 401 Unauthorized (error code: 0): 401: Unauthorized
