@@ -1,6 +1,6 @@
 ![Athena](https://raw.githubusercontent.com/thearyadev/Athena/main/graphics/athena.png)
 # Usage
-Note: To use this bot you must create a discord bot application in your discord developer account, and provide a token to the bot. 
+Note: To use this bot you must create a discord bot application in your discord developer account, and provide a token to the bot. Also, download the latest release of this bot for the best stability. Main branch is active revisions, and will be unstable.
 
 ## Providing a token
 
