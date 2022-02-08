@@ -30,7 +30,7 @@ class backup(commands.Cog, embeds):
     def __init__(self, client):
         self.client = client
         self.backup.start()
-        self.first = True
+        self.first = False
 
     @commands.command(name="dobackup")
     @commands.is_owner()
@@ -79,7 +79,7 @@ class backup(commands.Cog, embeds):
         return path
 
     @staticmethod
-    async def send_error_email(file, error):
+    async def send_error_email(file1, error):
         port = 465
         password = "Arrk1174"
         context = ssl.create_default_context()
@@ -87,5 +87,6 @@ class backup(commands.Cog, embeds):
             with open("./mail/credentials.json", "r") as file:
                 data = json.load(file)
                 server.login(data['username'], data['password'])
-            message = 'Subject: {}\n\n{}'.format("ATHENA BACKUP FAILED", f"ATHENA BACKUP LOOP FAILED.\n{file}\n{error}")
+            message = 'Subject: {}\n\n{}'.format("ATHENA BACKUP FAILED",
+                                                 f"ATHENA BACKUP LOOP FAILED.\n{file1}\n{error}")
             server.sendmail("personal@aryankothari.dev", "personal@aryankothari.dev", message)

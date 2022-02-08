@@ -119,15 +119,15 @@ class rsvp(commands.Cog, embeds):
         :param role:
         :return:
         """
-        guild = self.client.configs.find_guild(ctx.guild.id)
-        if "mentionable" in guild.__dict__.keys():
-            if len(guild.mentionable) < 25:
-                guild.mentionable.append(role.id)
-            else:
-                raise Exception("Role limit exceeded.")
+        guild = self.client.database.get(ctx.guild.id)
+
+        if len(guild.mentionable) < 25:
+            guild.mentionable.append(role.id)
         else:
-            guild.mentionable = [role.id]
-        self.client.configs.refresh()
+            raise Exception("Role limit exceeded.")
+
+        self.client.database.update_guild(guild)
+
         embed = nextcord.Embed(title="Mentionable role added",
                                description="Role has been added to list of mentionable roles.",
                                color=self.SUCCESS)
@@ -146,7 +146,7 @@ class rsvp(commands.Cog, embeds):
 
         try:
             roles = list()
-            for r_id in self.client.configs.find_guild(ctx.guild.id).mentionable:
+            for r_id in self.client.database.get(ctx.guild.id).mentionable:
                 r = nextcord.utils.get(ctx.guild.roles, id=r_id)
                 if r:
                     roles.append(r)

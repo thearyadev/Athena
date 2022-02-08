@@ -15,6 +15,7 @@ class errors(commands.Cog, embeds):
     def __init__(self, client):
         self.client = client
 
+
     @commands.Cog.listener()
     async def on_command_error(self, ctx, error):
         if isinstance(error, CommandNotFound):

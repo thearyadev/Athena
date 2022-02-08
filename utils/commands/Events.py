@@ -53,8 +53,7 @@ class events(commands.Cog, embeds):
         :return:
         """
         g = Guild(_id=guild.id, authorized=False, mentionable=list(), ratio_emoji=0)
-        self.client.database.add_guild(
-        )
+        self.client.database.add_guild(g)
         self.client.console.info_log(f"Guild: {g} successfully joined.")
 
     @commands.Cog.listener()
