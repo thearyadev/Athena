@@ -24,7 +24,9 @@ class Athena(commands.Bot, ABC):
         self.console = Console()
         self.configs = configuration.deserialize("./data/configuration/config.pkl")  # loads config from serialized file
         self.console.info_log("Deserialized Configuration Data")
-        super().__init__(*args, **kwargs, command_prefix="!>!")
+        intents = nextcord.Intents.all()
+        intents.members = True
+        super().__init__(*args, **kwargs, command_prefix="!>!", intents=intents)
         self.remove_command("help")
         self.console.info_log("Logging Configured: ./data/logs/nextcord.log")
         nc_logger = logging.getLogger("nextcord")  # nextcord logger
@@ -39,13 +41,14 @@ class Athena(commands.Bot, ABC):
         self.console.info_log(f"Cogs loaded successfully")
         sys.stderr = Redirect(file_path="./data/logs/errors.log", print=False, console=self.console)
         self.console.info_log("__stderr__ redirected to ./data/logs/error.log")
+
         self.database: GuildDatabase = GuildDatabase("./data/guilds/guilds.db", console=self.console)
 
     async def on_ready(self):
         if not self.persistent_views_added:
             from ..commands.RSVP import rsvp_options
             # register persistent views
-            # self.add_view(rsvp_options())
+            self.add_view(rsvp_options(self.console, reloaded=True))
             self.persistent_views_added = True
 
     def initialize(self, mode="-t"):

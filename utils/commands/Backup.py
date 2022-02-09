@@ -1,91 +1,80 @@
-from aiohttp.web_routedef import static
 from nextcord.ext import commands, tasks
-from nextcord.ext.commands import CommandNotFound
-import nextcord
 from ..tools.Embeds import embeds
 import os
-import sys
 from uuid import uuid4
 import shutil
-import asyncio
-from . import general
-from ..tools import Guild
-import shutil
-import smtplib, ssl
-import json
+import requests
+import zipfile
 
 
 class backup(commands.Cog, embeds):
     """
-    Handles backing up the files to bot owner DMS.
+    Backs up configs to a local storage server.
+    This module will not work for you without modifications, and an HTTP server
     """
-    LOAD = False
-    if "credentials.json" in os.listdir("./mail"):
-        with open("./mail/credentials.json", "r") as file:
-            if len(json.load(file).keys()):
-                LOAD = True
-
+    LOAD = True
     NAME = "Backup"
 
     def __init__(self, client):
         self.client = client
         self.backup.start()
-        self.first = False
 
     @commands.command(name="dobackup")
     @commands.is_owner()
     async def do_backup(self, ctx):
-        archive = await self.create_archives()
-        for f in os.listdir(archive):
-            try:
-                await ctx.send(file=nextcord.File(archive + "/" + f))
-                await asyncio.sleep(3)
-            except:
-                await ctx.send(f"File {f} is too large.")
+        try:
+            await ctx.send("Creating archive.")
+            archive = await self.create_archives()
+            with open(f"{archive}/athena.zip", "rb") as data:
 
-        shutil.rmtree(archive)
+                r = requests.post("http://10.0.0.189:1200/upload",
+                                  headers={"authorization": "aac9e5e85ec5450b84f697055b2c9c55", "folder": "athena"},
+                                  data=data)
+                if r.status_code != 200:
+                    raise Exception("Server error")
+            await ctx.send("Backup complete.")
+            shutil.rmtree(archive)
+        except Exception as e:
+            await ctx.send(f"Backup error: {e}")
 
     @tasks.loop(hours=6)
     async def backup(self):
-        arya = await self.client.fetch_user(305024830758060034)
-        if arya:
-            if self.first:
-                channel = await arya.create_dm()
-                archive = await self.create_archives()
-                for f in os.listdir(archive):
-                    try:
-                        await channel.send(file=nextcord.File(archive + "/" + f))
-                        await asyncio.sleep(3)
-                    except Exception as e:
-                        await self.send_error_email(f, e)
+        try:
+            self.client.console.info_log("Backing up active files to server...")
+            archive = await self.create_archives()
+            with open(f"{archive}/athena.zip", "rb") as data:
+                r = requests.post("http://10.0.0.189:1200/upload",
+                                  headers={"authorization": "aac9e5e85ec5450b84f697055b2c9c55", "folder": "athena"},
+                                  data=data)
+                if r.status_code != 200:
+                    raise Exception("Server error")
+            self.client.console.info_log("Backup complete.")
+            shutil.rmtree(archive)
+        except Exception as e:
+            await self.send_error_message(e)
 
-                shutil.rmtree(archive)
-            else:
-                self.first = True
-        else:
-            self.client.console.error_log("Backup user `arya` not found.")
-
-    @staticmethod
-    async def create_archives():
+    async def create_archives(self):
         archive_name = uuid4().hex
         path = "./temp/" + archive_name
         os.mkdir(path)
-        shutil.make_archive(path + "/configuration", "zip", "./data/configuration")
-        shutil.make_archive(path + "/guilds", "zip", "./data/guilds")
-        shutil.make_archive(path + "/logs", "zip", "./data/logs")
-        shutil.make_archive(path + "/media", "zip", "./data/media")
-        shutil.make_archive(path + "/scrims", "zip", "./data/scrims")
-
+        with zipfile.ZipFile(f"{path}/athena.zip", "w") as zf:
+            for f in self.get_paths("./data"):
+                zf.write(f)
         return path
 
+    async def send_error_message(self, error):
+        try:
+            arya = await self.client.fetch_user(305024830758060034)
+            channel = await arya.create_dm()
+            await channel.send(f"Backup error: {error}")
+        except:
+            self.client.console.error_log("Unable to create send DM to bot owner.")
+
     @staticmethod
-    async def send_error_email(file1, error):
-        port = 465
-        context = ssl.create_default_context()
-        with smtplib.SMTP_SSL("mail.privateemail.com", port, context=context) as server:
-            with open("./mail/credentials.json", "r") as file:
-                data = json.load(file)
-                server.login(data['username'], data['password'])
-            message = 'Subject: {}\n\n{}'.format("ATHENA BACKUP FAILED",
-                                                 f"ATHENA BACKUP LOOP FAILED.\n{file1}\n{error}")
-            server.sendmail("personal@aryankothari.dev", "personal@aryankothari.dev", message)
+    def get_paths(directory):
+        paths = list()
+        for root, directories, files in os.walk(directory):
+            for filename in files:
+                filepath = os.path.join(root, filename)
+                paths.append(filepath)
+        return paths

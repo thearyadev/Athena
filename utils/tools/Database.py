@@ -5,6 +5,7 @@ from rich import print
 import time
 import sys
 
+
 @dataclass
 class Guild:
     _id: int
@@ -15,6 +16,10 @@ class Guild:
     @property
     def id(self):
         return self._id
+
+    def reset(self):
+        self.mentionable = list()
+        self.ratio_emoji = 0
 
 
 class GuildDatabase:
@@ -75,7 +80,7 @@ class GuildDatabase:
         end = time.time()
 
         self.console.info_log(f"Guilds loaded successfully. count={len(self.guilds)}")
-        self.console.info_log(f"Load Execution Time: {end-start} seconds")
+        self.console.info_log(f"Load Execution Time: {end - start} seconds")
 
     def create_table(self):
         self.cursor.execute("""

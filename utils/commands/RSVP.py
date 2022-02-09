@@ -3,6 +3,7 @@ from nextcord.ext import commands
 import uuid
 from ..tools.Embeds import embeds
 import os
+import asyncio
 
 
 class Dropdown(nextcord.ui.Select):
@@ -27,34 +28,64 @@ class DropdownView(nextcord.ui.View):
 
 
 class rsvp_options(nextcord.ui.View):
-    def __init__(self):
+    def __init__(self, console, reloaded=False):
         super().__init__(timeout=None)
         self.joined = list()
         self.declined = list()
         self.deciding = list()
-        self.console = None
+        self.console = console
+        self.reloaded = reloaded
 
     @nextcord.ui.button(label="I will be there.", style=nextcord.ButtonStyle.green, custom_id="persistent_view:join")
     async def join(self, button: nextcord.ui.button, interaction: nextcord.Interaction):
         # await interaction.response.send_message(
         #     f"You are now attending: **{interaction.message.embeds[0].title.replace('RSVP: ', '')}**", ephemeral=True)
-        await self.add_rsvp(interaction.user, "joined", interaction.message)
+        await self.add_rsvp(interaction.user, "joined", interaction.message, interaction)
 
     @nextcord.ui.button(label="I will not be there.", style=nextcord.ButtonStyle.red,
                         custom_id="persistent_view:decline")
     async def decline(self, button: nextcord.ui.button, interaction: nextcord.Interaction):
         # await interaction.response.send_message(
         #     f"You have declined: **{interaction.message.embeds[0].title.replace('RSVP: ', '')}**", ephemeral=True)
-        await self.add_rsvp(interaction.user, "declined", interaction.message)
+        await self.add_rsvp(interaction.user, "declined", interaction.message, interaction)
 
     @nextcord.ui.button(label="Still deciding...", style=nextcord.ButtonStyle.grey,
                         custom_id="persistent_view:deciding")
     async def deciding(self, button: nextcord.ui.button, interaction: nextcord.Interaction):
         # await interaction.response.send_message(
         #     f"You are still deciding: **{interaction.message.embeds[0].title.replace('RSVP: ', '')}**", ephemeral=True)
-        await self.add_rsvp(interaction.user, "deciding", interaction.message)
+        await self.add_rsvp(interaction.user, "deciding", interaction.message, interaction)
 
-    async def add_rsvp(self, user, action, message):
+    async def add_rsvp(self, user, action, message, interaction):
+        await interaction.response.send_message("Response has been added.", ephemeral=True)
+
+        if self.reloaded:  # if bot restarted,
+            # read whats already in the view
+
+            joined_ids = ["".join([n for n in unparsed_id if n.isnumeric()]) for unparsed_id in
+                          message.embeds[0].fields[0].value.split("\n")]
+            declined_ids = ["".join([n for n in unparsed_id if n.isnumeric()]) for unparsed_id in
+                            message.embeds[0].fields[1].value.split("\n")]
+            pending_ids = ["".join([n for n in unparsed_id if n.isnumeric()]) for unparsed_id in
+                           message.embeds[0].fields[2].value.split("\n")]
+
+            for u_id in joined_ids:
+                if u_id:
+                    u = nextcord.utils.get(message.guild.members, id=int(u_id))
+                    if u:
+                        self.joined.append(u)
+            for u_id in declined_ids:
+                if u_id:
+                    u = nextcord.utils.get(message.guild.members, id=int(u_id))
+                    if u:
+                        self.declined.append(u)
+            for u_id in pending_ids:
+                if u_id:
+                    u = nextcord.utils.get(message.guild.members, id=int(u_id))
+                    if u:
+                        self.deciding.append(u)
+            self.reloaded = False
+
         self.console.info_log(f"Received RSVP entry from {user.name}")
         for reacted_user in self.joined:
             if reacted_user == user:
@@ -106,6 +137,7 @@ class rsvp(commands.Cog, embeds):
     """
     LOAD = True
     NAME = "RSVP"
+
     def __init__(self, client):
         self.client = client
 
@@ -143,20 +175,25 @@ class rsvp(commands.Cog, embeds):
         :param title:
         :return:
         """
-
         try:
             roles = list()
             for r_id in self.client.database.get(ctx.guild.id).mentionable:
                 r = nextcord.utils.get(ctx.guild.roles, id=r_id)
                 if r:
                     roles.append(r)
+            if not roles:
+                raise AttributeError
             view = DropdownView(roles)
-            await ctx.send("Please select a role to mention", view=view)
+            view_message = await ctx.send("Please select a role to mention", view=view)
         except AttributeError:
             raise Exception("This guild has not configured any mentionable roles. Please run `amr <role>` first.")
         await view.wait()
 
-        role = nextcord.utils.get(ctx.guild.roles, id=int(view.children[0].values[0].split("  ::  ")[1].strip()))
+        try:
+            role = nextcord.utils.get(ctx.guild.roles, id=int(view.children[0].values[0].split("  ::  ")[1].strip()))
+        except:
+            await view_message.delete()
+            return
 
         embed = nextcord.Embed(
             title=f"RSVP: {' '.join(title)}",
@@ -168,8 +205,8 @@ class rsvp(commands.Cog, embeds):
         embed.add_field(name="Pending (0)", value="____")
         embed.set_footer(
             text=f"RSVP Notification issued by {ctx.message.author.name}#{ctx.message.author.discriminator}")
-        view = rsvp_options()
-        view.console = self.client.console
+        view = rsvp_options(self.client.console)
+        # view.console = self.client.console
         announcement = await channel.send(role.mention, view=view, embed=embed)
         await announcement.edit("")
         self.client.console.info_log(f"RSVP '{' '.join(title)}' created and sent.")

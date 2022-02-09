@@ -119,3 +119,14 @@ class admin_configs(commands.Cog, embeds):
                                description="This guild has been configured.",
                                color=self.SUCCESS)
         await ctx.send(embed=embed)
+
+    @commands.command(name="reset")
+    @commands.is_owner()
+    @commands.guild_only()
+    async def reset_guild_config(self, ctx):
+        if guild := self.client.database.get(ctx.guild.id):
+            guild.reset()
+            self.client.database.update_guild(guild)
+        embed = nextcord.Embed(title="Reset", description="Guild has been reset to default configuration",
+                               color=self.SUCCESS)
+        await ctx.send(embed=embed)

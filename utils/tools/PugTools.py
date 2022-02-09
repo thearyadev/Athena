@@ -3,6 +3,11 @@ import nextcord
 from typing import Type, List, Tuple
 import random
 from rich import print
+from dataclasses import dataclass, astuple, asdict, field
+import discord
+from typing import Type, List, Tuple
+import inspect
+from rich import print
 
 
 class PugSession:
@@ -233,11 +238,6 @@ class PugSession:
         return _output
 
 
-from dataclasses import dataclass, astuple, asdict, field
-import discord
-from typing import Type, List, Tuple
-import inspect
-from rich import print
 
 
 @dataclass(order=True)
@@ -296,33 +296,3 @@ if __name__ == "__main__":
 
                 if r == "support":
                     role_density[2] += 1
-
-
-    def main():
-        session = PugSession(None, None, None, None)
-        total = 50000
-        pcount = 0
-        for i in track(range(total), description="Calculating..."):
-            session.random_sample_players(16)
-            session.generate()
-            eval_generation_quality(session.team1)
-            eval_generation_quality(session.team2)
-            pcount += 12
-
-        console.rule("RESULTS")
-        print(f"First preferred role: {results[0]} | [red]{(results[0] / pcount) * 100}%[/red]")
-        print(f"Second preferred role: {results[1]} | [red]{(results[1] / pcount) * 100}%[/red]")
-        print(f"Third preferred role: {results[2]} | [red]{(results[2] / pcount) * 100}%[/red]")
-        print(f"Did not get preferred role: {results[3]} | [red]{(results[3] / pcount) * 100}%[/red]")
-        print(f"Role Density: Tank {role_density[0]} DPS {role_density[1]} Support {role_density[2]}")
-
-
-    def main2():
-        session = PugSession(None, None, None, None)
-        # session.random_sample_players(300)
-        # session.generate()
-        # print(session.pending)
-        print(session.parse_to_string(1, 2, 3, 4))
-
-
-    main2()
