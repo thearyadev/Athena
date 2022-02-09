@@ -81,7 +81,6 @@ class backup(commands.Cog, embeds):
     @staticmethod
     async def send_error_email(file1, error):
         port = 465
-        password = "Arrk1174"
         context = ssl.create_default_context()
         with smtplib.SMTP_SSL("mail.privateemail.com", port, context=context) as server:
             with open("./mail/credentials.json", "r") as file:
