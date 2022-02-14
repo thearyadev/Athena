@@ -3,7 +3,7 @@ from nextcord.ext import commands
 from ..tools.Embeds import embeds
 from ..tools.PugTools import PugSession, Player
 import asyncio
-
+from ..tools.Athena import Athena
 
 class TeamPromptView(nextcord.ui.View):
     def __init__(self):
@@ -192,7 +192,7 @@ class pugs(commands.Cog, embeds):
     LOAD = True
     NAME = "PUGs"
 
-    def __init__(self, client):
+    def __init__(self, client: Athena):
         self.client = client
         self.session: PugSession = None
 

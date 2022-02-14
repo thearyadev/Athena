@@ -7,7 +7,7 @@ from ..commands.RSVP import rsvp_options
 import sys
 import io
 from ..tools import Guild
-
+from ..tools.Athena import Athena
 
 class events(commands.Cog, embeds):
     """
@@ -16,7 +16,7 @@ class events(commands.Cog, embeds):
     LOAD = True
     NAME = "Events"
 
-    def __init__(self, client):
+    def __init__(self, client: Athena):
         self.client = client
 
     @commands.Cog.listener()

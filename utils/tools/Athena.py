@@ -3,14 +3,11 @@ import nextcord
 from nextcord.ext import commands
 import logging
 from rich.logging import RichHandler
-
-from ..commands.RSVP import rsvp_options
 from ..tools.Configuration import configuration
 import sys
 from .console import Console
 from .STDERRredirect import Redirect
 from .Database import GuildDatabase
-
 import inspect
 
 
@@ -19,10 +16,14 @@ class Athena(commands.Bot, ABC):
     Client object for Discord bot. This class initializes the bot and loads all the Cogs.
     """
 
-    def __init__(self, *args, **kwargs):
+    DISTRIBUTION = "-d"
+    TESTING = "-t"
+    INACTIVE = "-i"
 
+    def __init__(self, *args, **kwargs):
+        self.mode = self.INACTIVE
         self.console = Console()
-        self.configs = configuration.deserialize("./data/configuration/config.pkl")  # loads config from serialized file
+        self.configs: configuration = configuration.deserialize("./data/configuration/config.pkl")  # loads config from serialized file
         self.console.info_log("Deserialized Configuration Data")
         intents = nextcord.Intents.all()
         intents.members = True
@@ -51,11 +52,14 @@ class Athena(commands.Bot, ABC):
             self.add_view(rsvp_options(self.console, reloaded=True))
             self.persistent_views_added = True
 
-    def initialize(self, mode="-t"):
-        if mode == "-t":
+    def initialize(self, mode=TESTING):
+        if mode == self.TESTING:
+            self.mode = self.TESTING
             self.console.info_log("Starting bot in [red]TESTING[/red] mode.")
+
             self.run(self.configs.testing_token)
-        elif mode == "-d":
+        elif mode == self.DISTRIBUTION:
+            self.mode = self.DISTRIBUTION
             self.console.info_log("Starting bot in [red]DISTRIBUTION[/red] mode.")
             self.run(self.configs.token)
 
@@ -71,6 +75,6 @@ class Athena(commands.Bot, ABC):
                         else:
                             self.console.info_log(f"Loaded extension [yellow]>> {name}[yellow]")
                     else:
-                        self.console.info_log(f"Skipping module [red]>> {name}[red]")
+                        self.console.info_log(f"Skipping module [red] >> {extension.NAME}[red]")
                 else:
                     self.console.error_log(f"Unknown module imported [red]>> {name}[red]")

@@ -6,7 +6,7 @@ from nextcord import CategoryChannel
 import datetime
 import json
 from ..tools.Embeds import embeds
-
+from ..tools.Athena import Athena
 
 class Confirm(nextcord.ui.View):
     def __init__(self):
@@ -34,7 +34,7 @@ class repair_channel_order(commands.Cog, embeds):
     LOAD = True
     NAME = "Repair Channel Order"
 
-    def __init__(self, client):
+    def __init__(self, client: Athena):
         super().__init__()
         self.client = client
         self.running_context = None

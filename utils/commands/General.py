@@ -7,13 +7,14 @@ import sys
 import shutil
 from uuid import uuid4
 import os
+from ..tools.Athena import Athena
 
 
 class general(commands.Cog, embeds):
     LOAD = True
     NAME = "General"
 
-    def __init__(self, client):
+    def __init__(self, client: Athena):
         self.client = client
         self.client.check(self.check_authorized)
 
@@ -90,4 +91,3 @@ class general(commands.Cog, embeds):
                 await ctx.send(file=nextcord.File("./graphics/scrim.png"))
             else:
                 raise ValueError(f"Invalid command category: '{category}'")
-

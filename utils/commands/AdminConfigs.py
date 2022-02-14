@@ -9,6 +9,7 @@ import shutil
 import asyncio
 from . import general
 from ..tools import Guild
+from ..tools.Athena import Athena
 
 
 class admin_configs(commands.Cog, embeds):
@@ -18,7 +19,7 @@ class admin_configs(commands.Cog, embeds):
     LOAD = True
     NAME = "Admin Configs"
 
-    def __init__(self, client):
+    def __init__(self, client: Athena):
         self.client = client
 
     @commands.command()

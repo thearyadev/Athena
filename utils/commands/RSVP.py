@@ -4,7 +4,7 @@ import uuid
 from ..tools.Embeds import embeds
 import os
 import asyncio
-
+from ..tools.Athena import Athena
 
 class Dropdown(nextcord.ui.Select):
     """
@@ -138,7 +138,7 @@ class rsvp(commands.Cog, embeds):
     LOAD = True
     NAME = "RSVP"
 
-    def __init__(self, client):
+    def __init__(self, client: Athena):
         self.client = client
 
     @commands.command(name="amr")

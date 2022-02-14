@@ -5,12 +5,13 @@ from ..tools.Embeds import embeds
 import uuid
 import datetime
 import os
-
+from ..tools.Athena import Athena
 
 class moderation(commands.Cog, embeds):
     LOAD = True
     NAME = "Moderation"
-    def __init__(self, client):
+
+    def __init__(self, client: Athena):
         self.client = client
 
     @commands.command("archive")

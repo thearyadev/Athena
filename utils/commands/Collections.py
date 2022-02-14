@@ -1,4 +1,4 @@
-from nextcord.ext import commands
+from nextcord.ext import commands, tasks
 from nextcord.ext.commands import CommandNotFound
 import nextcord
 from ..tools import embeds
@@ -10,12 +10,13 @@ import shutil
 import urllib
 import mimetypes
 import random
-
+from ..tools.Athena import Athena
 
 class Dropdown(nextcord.ui.Select):
     """
     Creates UI for folder selection
     """
+
     def __init__(self):
         options = [
             nextcord.SelectOption(label=filename, description=None) for filename in os.listdir("./data/media")
@@ -40,7 +41,8 @@ class collections(commands.Cog, embeds):
     """
     LOAD = True
     NAME = "Collections"
-    def __init__(self, client):
+
+    def __init__(self, client: Athena):
         self.client = client
         self.media_path = "./data/media/"  # media path
 
@@ -54,11 +56,16 @@ class collections(commands.Cog, embeds):
                     try:  # try except in case the folder is empty
                         self.client.console.info_log(
                             f"Command Executed: '{message.content.replace('!', '')}' by {message.author} in {message.guild}")
+                        image_paths = os.listdir(
+                            self.media_path + message.content.replace(self.client.configs.prefix,
+                                                                      ""))  # get all the paths
+                        random.shuffle(image_paths)  # shuffle the list
+
                         await message.channel.send(
                             file=nextcord.File(  # pick a random file from the folder, and send it.
                                 self.media_path + message.content.replace(self.client.configs.prefix, "") + "/" +
-                                random.sample(os.listdir(
-                                    self.media_path + message.content.replace(self.client.configs.prefix, "")), 1)[0]))
+                                image_paths[0]  # send first one in list
+                            ))
                         self.client.console.info_log(
                             f"Media sent from collection {message.content.replace(self.client.configs.prefix, '')}")
                     except ValueError:

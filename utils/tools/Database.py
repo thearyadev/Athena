@@ -4,6 +4,7 @@ import json
 from rich import print
 import time
 import sys
+from ..tools.console import Console
 
 
 @dataclass
@@ -23,7 +24,7 @@ class Guild:
 
 
 class GuildDatabase:
-    def __init__(self, path, console):
+    def __init__(self, path, console: Console):
         self.console = console
         self.connection = sqlite3.connect(path)
         self.console.info_log("Database connection successful.")

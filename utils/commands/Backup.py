@@ -5,6 +5,7 @@ from uuid import uuid4
 import shutil
 import requests
 import zipfile
+from ..tools.Athena import Athena
 
 
 class backup(commands.Cog, embeds):
@@ -12,10 +13,10 @@ class backup(commands.Cog, embeds):
     Backs up configs to a local storage server.
     This module will not work for you without modifications, and an HTTP server
     """
-    LOAD = True
+    LOAD = False
     NAME = "Backup"
 
-    def __init__(self, client):
+    def __init__(self, client: Athena):
         self.client = client
         self.backup.start()
 
@@ -27,9 +28,14 @@ class backup(commands.Cog, embeds):
             archive = await self.create_archives()
             with open(f"{archive}/athena.zip", "rb") as data:
 
-                r = requests.post("http://10.0.0.189:1200/upload",
-                                  headers={"authorization": "aac9e5e85ec5450b84f697055b2c9c55", "folder": "athena"},
-                                  data=data)
+                if self.client.mode == Athena.DISTRIBUTION:
+                    r = requests.post("http://10.0.0.189:1200/upload",
+                                      headers={"authorization": "aac9e5e85ec5450b84f697055b2c9c55", "folder": "athena"},
+                                      data=data)
+                elif self.client.mode == Athena.TESTING:
+                    r = requests.post("http://10.0.0.189:1200/upload",
+                                      headers={"authorization": "aac9e5e85ec5450b84f697055b2c9c55", "folder": "athena-testing"},
+                                      data=data)
                 if r.status_code != 200:
                     raise Exception("Server error")
             await ctx.send("Backup complete.")
@@ -37,7 +43,7 @@ class backup(commands.Cog, embeds):
         except Exception as e:
             await ctx.send(f"Backup error: {e}")
 
-    @tasks.loop(hours=6)
+    @tasks.loop(hours=3)
     async def backup(self):
         try:
             self.client.console.info_log("Backing up active files to server...")

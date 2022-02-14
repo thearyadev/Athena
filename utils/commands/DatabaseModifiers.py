@@ -9,7 +9,7 @@ import shutil
 import asyncio
 from . import general
 from ..tools import Guild
-
+from ..tools.Athena import Athena
 
 class database_modifiers(commands.Cog, embeds):
     """
@@ -18,7 +18,7 @@ class database_modifiers(commands.Cog, embeds):
     LOAD = True
     NAME = "Database Modifiers"
 
-    def __init__(self, client):
+    def __init__(self, client: Athena):
         self.client = client
 
     @commands.command()

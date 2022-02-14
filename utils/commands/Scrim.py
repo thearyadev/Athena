@@ -12,6 +12,7 @@ import mimetypes
 import random
 import datetime
 from ..tools.ScrimTools import ScrimLogs
+from ..tools.Athena import Athena
 
 
 class Dropdown(nextcord.ui.Select):
@@ -135,9 +136,10 @@ class scrim(commands.Cog, embeds):
     User prompts for adding scrims to the scrim log, and getting the full scrim log.
     """
 
-    LOAD = True
+    LOAD = False
     NAME = "Scrim"
-    def __init__(self, client):
+
+    def __init__(self, client: Athena):
         self.client = client
         self.scrim_log = ScrimLogs("./data/scrims/", valid_maps=self.client.configs.valid_maps)
         self.client.console.info_log(
