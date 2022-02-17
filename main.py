@@ -7,6 +7,5 @@ def main():
     server.initialize(mode=Athena.DISTRIBUTION)
 
 
-
 if __name__ == '__main__':
     main()
