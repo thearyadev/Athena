@@ -47,3 +47,28 @@
 2022-02-17 13:08:03,470:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
 2022-02-17 13:08:44,679:DEBUG:nextcord.gateway: Keeping shard ID None websocket alive with sequence 4.
 2022-02-17 13:08:44,725:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+2022-02-17 13:08:58,473:DEBUG:nextcord.gateway: Received WSMessage(type=<WSMsgType.CLOSE: 8>, data=4003, extra='Not authenticated.')
+2022-02-17 13:08:58,473:INFO:nextcord.gateway: Websocket closed with 4003, attempting a reconnect.
+2022-02-17 13:08:58,473:INFO:nextcord.client: Got a request to RESUME the websocket.
+2022-02-17 13:08:58,473:DEBUG:nextcord.client: Dispatching event disconnect
+2022-02-17 13:08:58,612:DEBUG:nextcord.http: GET https://discord.com/api/v9/gateway with None has returned 200
+2022-02-17 13:08:58,612:DEBUG:nextcord.http: GET https://discord.com/api/v9/gateway has received {'url': 'wss://gateway.discord.gg'}
+2022-02-17 13:08:58,781:DEBUG:nextcord.gateway: Created websocket connected to wss://gateway.discord.gg?encoding=json&v=9&compress=zlib-stream
+2022-02-17 13:08:58,781:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 10, 'd': {'heartbeat_interval': 41250, '_trace': ['["gateway-prd-main-gf38",{"micros":0.0}]']}}
+2022-02-17 13:08:58,781:INFO:nextcord.gateway: Shard ID None has sent the RESUME payload.
+2022-02-17 13:08:58,825:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+2022-02-17 13:08:58,825:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 9, 'd': False}
+2022-02-17 13:08:58,825:INFO:nextcord.gateway: Shard ID None session has been invalidated.
+2022-02-17 13:08:58,878:INFO:nextcord.client: Got a request to IDENTIFY the websocket.
+2022-02-17 13:08:58,878:DEBUG:nextcord.client: Dispatching event disconnect
+2022-02-17 13:08:58,909:DEBUG:nextcord.http: GET https://discord.com/api/v9/gateway with None has returned 200
+2022-02-17 13:08:58,909:DEBUG:nextcord.http: GET https://discord.com/api/v9/gateway has received {'url': 'wss://gateway.discord.gg'}
+2022-02-17 13:08:59,017:DEBUG:nextcord.gateway: Created websocket connected to wss://gateway.discord.gg?encoding=json&v=9&compress=zlib-stream
+2022-02-17 13:08:59,017:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 10, 'd': {'heartbeat_interval': 41250, '_trace': ['["gateway-prd-main-njvj",{"micros":0.0}]']}}
+2022-02-17 13:09:04,021:INFO:nextcord.gateway: Shard ID None has sent the IDENTIFY payload.
+2022-02-17 13:09:04,021:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+2022-02-17 13:09:04,088:DEBUG:nextcord.gateway: Received WSMessage(type=<WSMsgType.CLOSE: 8>, data=4004, extra='Authentication failed.')
+2022-02-17 13:09:04,089:INFO:nextcord.gateway: Websocket closed with 4004, cannot reconnect.
+2022-02-17 13:09:04,089:DEBUG:nextcord.client: Dispatching event disconnect
+2022-02-17 13:09:04,089:INFO:nextcord.client: Cleaning up tasks.
+2022-02-17 13:09:04,089:INFO:nextcord.client: Closing the event loop.

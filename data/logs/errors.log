@@ -751,3 +751,38 @@ Traceback (most recent call last):
 RuntimeError: Event loop is closed
 Exception ignored in sys.unraisablehook: <built-in function unraisablehook>
 AttributeError: 'Redirect' object has no attribute 'flush'
+
+---------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Compu\Documents\Athena\main.py", line 13, in <module>
+    main()
+  File "C:\Users\Compu\Documents\Athena\main.py", line 9, in main
+    server.initialize(mode=Athena.TESTING)
+  File "C:\Users\Compu\Documents\Athena\utils\tools\Athena.py", line 60, in initialize
+    self.run(self.configs.testing_token)
+  File "C:\Users\Compu\Documents\Athena\venv\lib\site-packages\nextcord\client.py", line 730, in run
+    return future.result()
+  File "C:\Users\Compu\Documents\Athena\venv\lib\site-packages\nextcord\client.py", line 709, in runner
+    await self.start(*args, **kwargs)
+  File "C:\Users\Compu\Documents\Athena\venv\lib\site-packages\nextcord\client.py", line 673, in start
+    await self.connect(reconnect=reconnect)
+  File "C:\Users\Compu\Documents\Athena\venv\lib\site-packages\nextcord\client.py", line 579, in connect
+    await self.ws.poll_event()
+  File "C:\Users\Compu\Documents\Athena\venv\lib\site-packages\nextcord\gateway.py", line 585, in poll_event
+    raise ConnectionClosed(self.socket, shard_id=self.shard_id, code=code) from None
+nextcord.errors.ConnectionClosed: Shard ID None WebSocket closed with 4004
+Exception ignored in: <function _ProactorBasePipeTransport.__del__ at 0x00000260A7B65000>
+
+---------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\proactor_events.py", line 116, in __del__
+    self.close()
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\proactor_events.py", line 108, in close
+    self._loop.call_soon(self._call_connection_lost, None)
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 745, in call_soon
+    self._check_closed()
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 510, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+Exception ignored in sys.unraisablehook: <built-in function unraisablehook>
+AttributeError: 'Redirect' object has no attribute 'flush'
