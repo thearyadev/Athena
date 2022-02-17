@@ -3,10 +3,8 @@ from utils.tools import Athena
 
 def main():
     server = Athena()
-    server.configs.token = ""
-    server.configs.testing_token = "smile2"
-    server.configs.version = "4.4.0"
-    server.initialize(mode=Athena.TESTING)
+    server.configs.token = "YOUR TOKEN HERE"
+    server.initialize(mode=Athena.DISTRIBUTION)
 
 
 if __name__ == '__main__':
