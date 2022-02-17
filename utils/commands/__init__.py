@@ -10,3 +10,4 @@ from .Scrim import scrim
 from .AdminConfigs import admin_configs
 from .DatabaseModifiers import database_modifiers
 from .Backup import backup
+from .UrbanDictionary import urban_dictionary

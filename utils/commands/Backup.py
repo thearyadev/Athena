@@ -13,7 +13,7 @@ class backup(commands.Cog, embeds):
     Backs up configs to a local storage server.
     This module will not work for you without modifications, and an HTTP server
     """
-    LOAD = True
+    LOAD = False
     NAME = "Backup"
 
     def __init__(self, client: Athena):
