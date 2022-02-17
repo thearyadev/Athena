@@ -23,17 +23,22 @@ class DefinitionPages(nextcord.ui.View):
             """
 
             word = self.word_list[self.current_page]
+
+            definition = word['definition']
+            if len(definition) > 1024: definition = definition[:1020] + "..."
             embed = nextcord.Embed(
                 title=f"Define: {word['word']}",
-                description=word['definition'],
+                description=definition,
                 color=embeds.SUCCESS
             )
             embed.set_footer(
                 text=f"Command issued by {self.ctx.message.author.name}#{self.ctx.message.author.discriminator}")
+            display = word['example'] if word['example'] else 'No examples.'
+            if len(display) > 1024: display = display[:1020] + "..."
 
-            embed.add_field(name="Example", value=word['example'] if word['example'] else 'No examples.')
+            embed.add_field(name="Example", value=display)
             embed.add_field(name="Page",
-                            value=f"{self.current_page + 1}/{len(self.word_list) - 1}")
+                            value=f"{self.current_page + 1}/{len(self.word_list) - 1}", inline=False)
         except KeyError:
             """
             if there is a keyerror (where the data expected is not there),
@@ -45,7 +50,7 @@ class DefinitionPages(nextcord.ui.View):
                 color=embeds.FAIL
             )
             embed.add_field(name="Page",
-                            value=f"{self.current_page + 1}/{len(self.word_list) - 1}")
+                            value=f"{self.current_page + 1}/{len(self.word_list) - 1}", inline=False)
             embed.set_footer(
                 text=f"Command issued by {self.ctx.message.author.name}#{self.ctx.message.author.discriminator}")
 
