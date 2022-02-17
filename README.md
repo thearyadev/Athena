@@ -8,10 +8,17 @@ Note: To use this bot you must create a discord bot application in your discord 
 2. Replace "YOUR TOKEN HERE" with your discord bot token.
 ```python
 from utils.tools import Athena
-from utils.tools.Configuration import configuration
-server = Athena()
-server.configs.token = "YOUR TOKEN HERE"
-server.initialize(mode="-d")
+
+
+def main():
+    server = Athena()
+    server.configs.token = "YOUR TOKEN HERE"
+    server.initialize(mode=Athena.DISTRIBUTION)
+
+
+if __name__ == '__main__':
+    main()
+
 ```
 
 
