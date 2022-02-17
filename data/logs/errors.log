@@ -646,3 +646,108 @@ Traceback (most recent call last):
   File "C:\Users\Compu\Documents\Athena-V4\venv\lib\site-packages\nextcord\http.py", line 337, in request
     raise HTTPException(response, data)
 nextcord.errors.HTTPException: 401 Unauthorized (error code: 0): 401: Unauthorized
+
+---------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Compu\Documents\Athena\venv\lib\site-packages\nextcord\http.py", line 382, in static_login
+    data = await self.request(Route('GET', '/users/@me'))
+  File "C:\Users\Compu\Documents\Athena\venv\lib\site-packages\nextcord\http.py", line 337, in request
+    raise HTTPException(response, data)
+nextcord.errors.HTTPException: 401 Unauthorized (error code: 0): 401: Unauthorized
+
+The above exception was the direct cause of the following exception:
+
+---------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Compu\Documents\Athena\main.py", line 12, in <module>
+    main()
+  File "C:\Users\Compu\Documents\Athena\main.py", line 8, in main
+    server.initialize(mode=Athena.DISTRIBUTION)
+  File "C:\Users\Compu\Documents\Athena\utils\tools\Athena.py", line 64, in initialize
+    self.run(self.configs.token)
+  File "C:\Users\Compu\Documents\Athena\venv\lib\site-packages\nextcord\client.py", line 730, in run
+    return future.result()
+  File "C:\Users\Compu\Documents\Athena\venv\lib\site-packages\nextcord\client.py", line 709, in runner
+    await self.start(*args, **kwargs)
+  File "C:\Users\Compu\Documents\Athena\venv\lib\site-packages\nextcord\client.py", line 672, in start
+    await self.login(token)
+  File "C:\Users\Compu\Documents\Athena\venv\lib\site-packages\nextcord\client.py", line 540, in login
+    data = await self.http.static_login(token.strip())
+  File "C:\Users\Compu\Documents\Athena\venv\lib\site-packages\nextcord\http.py", line 386, in static_login
+    raise LoginFailure('Improper token has been passed.') from exc
+nextcord.errors.LoginFailure: Improper token has been passed.
+Exception ignored in: <function _ProactorBasePipeTransport.__del__ at 0x000002CE660E1510>
+
+---------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\proactor_events.py", line 116, in __del__
+    self.close()
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\proactor_events.py", line 108, in close
+    self._loop.call_soon(self._call_connection_lost, None)
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 745, in call_soon
+    self._check_closed()
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 510, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+Exception ignored in sys.unraisablehook: <built-in function unraisablehook>
+AttributeError: 'Redirect' object has no attribute 'flush'
+Exception ignored in: <function _ProactorBasePipeTransport.__del__ at 0x00000265CEE51510>
+
+---------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\proactor_events.py", line 116, in __del__
+    self.close()
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\proactor_events.py", line 108, in close
+    self._loop.call_soon(self._call_connection_lost, None)
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 745, in call_soon
+    self._check_closed()
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 510, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+Exception ignored in sys.unraisablehook: <built-in function unraisablehook>
+AttributeError: 'Redirect' object has no attribute 'flush'
+Exception ignored in: <function _ProactorBasePipeTransport.__del__ at 0x000001EFEB071510>
+
+---------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\proactor_events.py", line 116, in __del__
+    self.close()
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\proactor_events.py", line 108, in close
+    self._loop.call_soon(self._call_connection_lost, None)
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 745, in call_soon
+    self._check_closed()
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 510, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+Exception ignored in sys.unraisablehook: <built-in function unraisablehook>
+AttributeError: 'Redirect' object has no attribute 'flush'
+Exception ignored in: <function _ProactorBasePipeTransport.__del__ at 0x0000026E253F1510>
+
+---------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\proactor_events.py", line 116, in __del__
+    self.close()
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\proactor_events.py", line 108, in close
+    self._loop.call_soon(self._call_connection_lost, None)
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 745, in call_soon
+    self._check_closed()
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 510, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+Exception ignored in sys.unraisablehook: <built-in function unraisablehook>
+AttributeError: 'Redirect' object has no attribute 'flush'
+Exception ignored in: <function _ProactorBasePipeTransport.__del__ at 0x000002367CA71510>
+
+---------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\proactor_events.py", line 116, in __del__
+    self.close()
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\proactor_events.py", line 108, in close
+    self._loop.call_soon(self._call_connection_lost, None)
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 745, in call_soon
+    self._check_closed()
+  File "C:\Users\Compu\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 510, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+Exception ignored in sys.unraisablehook: <built-in function unraisablehook>
+AttributeError: 'Redirect' object has no attribute 'flush'

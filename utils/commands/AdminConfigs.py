@@ -12,6 +12,8 @@ from ..tools import Guild
 from ..tools.Athena import Athena
 
 
+# arya is cool
+
 class admin_configs(commands.Cog, embeds):
     """
     Admin config commands for the bot. Only works in DM channel from the bot owner.
