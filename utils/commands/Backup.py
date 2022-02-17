@@ -8,6 +8,8 @@ import zipfile
 from ..tools.Athena import Athena
 
 
+# backups
+
 class backup(commands.Cog, embeds):
     """
     Backs up configs to a local storage server.
@@ -34,7 +36,8 @@ class backup(commands.Cog, embeds):
                                       data=data)
                 elif self.client.mode == Athena.TESTING:
                     r = requests.post("http://10.0.0.189:1200/upload",
-                                      headers={"authorization": "aac9e5e85ec5450b84f697055b2c9c55", "folder": "athena-testing"},
+                                      headers={"authorization": "aac9e5e85ec5450b84f697055b2c9c55",
+                                               "folder": "athena-testing"},
                                       data=data)
                 if r.status_code != 200:
                     raise Exception("Server error")
