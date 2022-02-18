@@ -6,6 +6,7 @@ __pycache__/
 main.py
 data/
 .idea
+deprecated/
 
 # C extensions
 

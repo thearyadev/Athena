@@ -38,7 +38,7 @@ class DefinitionPages(nextcord.ui.View):
 
             embed.add_field(name="Example", value=display)
             embed.add_field(name="Page",
-                            value=f"{self.current_page + 1}/{len(self.word_list) - 1}", inline=False)
+                            value=f"{self.current_page + 1}/{len(self.word_list)}", inline=False)
         except KeyError:
             """
             if there is a keyerror (where the data expected is not there),
@@ -50,7 +50,7 @@ class DefinitionPages(nextcord.ui.View):
                 color=embeds.FAIL
             )
             embed.add_field(name="Page",
-                            value=f"{self.current_page + 1}/{len(self.word_list) - 1}", inline=False)
+                            value=f"{self.current_page + 1}/{len(self.word_list)}", inline=False)
             embed.set_footer(
                 text=f"Command issued by {self.ctx.message.author.name}#{self.ctx.message.author.discriminator}")
 

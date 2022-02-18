@@ -6,7 +6,6 @@ from .Moderation import moderation
 from .PUGs import pugs
 from .RepairChannelOrder import repair_channel_order
 from .RSVP import rsvp
-from .Scrim import scrim
 from .AdminConfigs import admin_configs
 from .DatabaseModifiers import database_modifiers
 from .Backup import backup
