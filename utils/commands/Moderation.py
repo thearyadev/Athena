@@ -7,8 +7,7 @@ import datetime
 import os
 from ..tools.Athena import Athena
 
-
-# moderation
+#coool
 class moderation(commands.Cog, embeds):
     LOAD = True
     NAME = "Moderation"
