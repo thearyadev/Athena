@@ -157,3 +157,52 @@
 2022-02-18 11:19:18,339:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
 2022-02-18 11:19:59,558:DEBUG:nextcord.gateway: Keeping shard ID None websocket alive with sequence 26.
 2022-02-18 11:19:59,603:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+2022-02-18 11:20:40,814:DEBUG:nextcord.gateway: Keeping shard ID None websocket alive with sequence 26.
+2022-02-18 11:20:40,865:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+2022-02-18 11:21:22,072:DEBUG:nextcord.gateway: Keeping shard ID None websocket alive with sequence 26.
+2022-02-18 11:21:22,116:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+2022-02-18 11:22:03,331:DEBUG:nextcord.gateway: Keeping shard ID None websocket alive with sequence 26.
+2022-02-18 11:22:03,375:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+2022-02-18 11:22:44,593:DEBUG:nextcord.gateway: Keeping shard ID None websocket alive with sequence 26.
+2022-02-18 11:22:44,642:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+2022-02-18 11:23:25,848:DEBUG:nextcord.gateway: Keeping shard ID None websocket alive with sequence 26.
+2022-02-18 11:23:25,907:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+2022-02-18 11:24:07,106:DEBUG:nextcord.gateway: Keeping shard ID None websocket alive with sequence 26.
+2022-02-18 11:24:07,157:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+2022-02-18 11:24:48,371:DEBUG:nextcord.gateway: Keeping shard ID None websocket alive with sequence 26.
+2022-02-18 11:24:48,419:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+2022-02-18 11:25:29,636:DEBUG:nextcord.gateway: Keeping shard ID None websocket alive with sequence 26.
+2022-02-18 11:25:29,683:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+2022-02-18 11:25:53,324:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': 'PRESENCE_UPDATE', 's': 27, 'op': 0, 'd': {'user': {'id': '561706078174183424'}, 'status': 'online', 'guild_id': '820065732955996200', 'client_status': {'mobile': 'online', 'desktop': 'idle'}, 'activities': [{'type': 4, 'state': 'Crawling in the Deep', 'name': 'Custom Status', 'id': 'custom', 'emoji': {'name': 'Starege', 'id': '903807606026547210', 'animated': True}, 'created_at': 1645179301153}, {'type': 0, 'state': 'with Medal.tv', 'session_id': 'dd038a6a8c7d9601ac2d3b4845aea395', 'name': 'Medal', 'id': 'f434b761ed994387', 'details': 'Recently clipped Overwatch', 'created_at': 1645183604259, 'buttons': ['Follow on Medal', 'Start Clipping with Medal'], 'assets': {'large_text': 'Overwatch', 'large_image': '859167360925564958'}, 'application_id': '307998818547531777'}]}}
+2022-02-18 11:25:53,324:DEBUG:nextcord.client: Dispatching event socket_event_type
+2022-02-18 11:25:53,324:DEBUG:nextcord.client: Dispatching event presence_update
+2022-02-18 11:25:54,091:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': 'PRESENCE_UPDATE', 's': 28, 'op': 0, 'd': {'user': {'id': '561706078174183424'}, 'status': 'online', 'guild_id': '820065732955996200', 'client_status': {'mobile': 'online', 'desktop': 'idle'}, 'activities': [{'type': 4, 'state': 'Crawling in the Deep', 'name': 'Custom Status', 'id': 'custom', 'emoji': {'name': 'Starege', 'id': '903807606026547210', 'animated': True}, 'created_at': 1645201554029}, {'type': 0, 'state': 'with Medal.tv', 'session_id': 'dd038a6a8c7d9601ac2d3b4845aea395', 'name': 'Medal', 'id': 'f434b761ed994387', 'details': 'Recently clipped Overwatch', 'created_at': 1645183604259, 'buttons': ['Follow on Medal', 'Start Clipping with Medal'], 'assets': {'large_text': 'Overwatch', 'large_image': '859167360925564958'}, 'application_id': '307998818547531777'}]}}
+2022-02-18 11:25:54,091:DEBUG:nextcord.client: Dispatching event socket_event_type
+2022-02-18 11:25:54,091:DEBUG:nextcord.client: Dispatching event presence_update
+2022-02-18 11:26:10,892:DEBUG:nextcord.gateway: Keeping shard ID None websocket alive with sequence 28.
+2022-02-18 11:26:10,946:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+2022-02-18 11:26:52,144:DEBUG:nextcord.gateway: Keeping shard ID None websocket alive with sequence 28.
+2022-02-18 11:26:52,189:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+2022-02-18 11:27:33,409:DEBUG:nextcord.gateway: Keeping shard ID None websocket alive with sequence 28.
+2022-02-18 11:27:33,453:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+2022-02-18 11:27:53,471:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': 'PRESENCE_UPDATE', 's': 29, 'op': 0, 'd': {'user': {'id': '561706078174183424'}, 'status': 'idle', 'guild_id': '820065732955996200', 'client_status': {'desktop': 'idle'}, 'activities': [{'type': 4, 'state': 'Crawling in the Deep', 'name': 'Custom Status', 'id': 'custom', 'emoji': {'name': 'Starege', 'id': '903807606026547210', 'animated': True}, 'created_at': 1645179301153}, {'type': 0, 'state': 'with Medal.tv', 'session_id': 'dd038a6a8c7d9601ac2d3b4845aea395', 'name': 'Medal', 'id': 'f434b761ed994387', 'details': 'Recently clipped Overwatch', 'created_at': 1645183604259, 'buttons': ['Follow on Medal', 'Start Clipping with Medal'], 'assets': {'large_text': 'Overwatch', 'large_image': '859167360925564958'}, 'application_id': '307998818547531777'}]}}
+2022-02-18 11:27:53,471:DEBUG:nextcord.client: Dispatching event socket_event_type
+2022-02-18 11:27:53,471:DEBUG:nextcord.client: Dispatching event presence_update
+2022-02-18 11:28:14,671:DEBUG:nextcord.gateway: Keeping shard ID None websocket alive with sequence 29.
+2022-02-18 11:28:14,730:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+2022-02-18 11:28:55,936:DEBUG:nextcord.gateway: Keeping shard ID None websocket alive with sequence 29.
+2022-02-18 11:28:55,984:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+2022-02-18 11:29:37,199:DEBUG:nextcord.gateway: Keeping shard ID None websocket alive with sequence 29.
+2022-02-18 11:29:37,246:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+2022-02-18 11:30:18,450:DEBUG:nextcord.gateway: Keeping shard ID None websocket alive with sequence 29.
+2022-02-18 11:30:18,509:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+2022-02-18 11:30:59,710:DEBUG:nextcord.gateway: Keeping shard ID None websocket alive with sequence 29.
+2022-02-18 11:30:59,756:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+2022-02-18 11:31:40,973:DEBUG:nextcord.gateway: Keeping shard ID None websocket alive with sequence 29.
+2022-02-18 11:31:41,018:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+2022-02-18 11:32:22,227:DEBUG:nextcord.gateway: Keeping shard ID None websocket alive with sequence 29.
+2022-02-18 11:32:22,287:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+2022-02-18 11:33:03,478:DEBUG:nextcord.gateway: Keeping shard ID None websocket alive with sequence 29.
+2022-02-18 11:33:03,529:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+2022-02-18 11:33:44,743:DEBUG:nextcord.gateway: Keeping shard ID None websocket alive with sequence 29.
+2022-02-18 11:33:44,788:DEBUG:nextcord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
