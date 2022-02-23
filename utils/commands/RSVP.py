@@ -166,7 +166,7 @@ class rsvp(commands.Cog, embeds):
         await ctx.send(embed=embed)
 
     @commands.command()
-    @commands.has_permissions(manage_guild=True)
+    @commands.has_role("Manager")
     async def rsvp(self, ctx, channel: nextcord.TextChannel, *title):
         """
         sends notification to specified channel

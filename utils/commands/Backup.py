@@ -23,7 +23,9 @@ class backup(commands.Cog, embeds):
 
     def __init__(self, client: Athena):
         self.client = client
-        self.backup.start()
+        if self.client.mode == Athena.DISTRIBUTION:  # only backup if we're in distribution mode.
+            # No need to keep backing up empty directories
+            self.backup.start()
 
     @commands.command(name="dobackup")
     @commands.is_owner()

@@ -20,8 +20,8 @@ class general(commands.Cog, embeds):
 
     def check_authorized(self, ctx):
         """
-        Only authorized servers may use commands in this bot.
-         This checks that the guild is authorized before allowing commands go go through.
+         Only authorized servers may use commands in this bot.
+         This checks that the guild is authorized before allowing commands to go through.
         :param ctx:
         :return:
         """

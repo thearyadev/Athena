@@ -19,7 +19,7 @@ class moderation(commands.Cog, embeds):
     @commands.has_permissions(manage_guild=True)
     async def create_channel_history_archive(self, ctx, amount: int, channel: nextcord.TextChannel = None):
         """
-        Creates a text file with all of the messages sent in a channel.
+        Creates a text file with all the messages sent in a channel.
         :param ctx:
         :param amount:
         :param channel:
