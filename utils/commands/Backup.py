@@ -16,7 +16,7 @@ class backup(commands.Cog, embeds):
     try:
         requests.get("http://10.0.0.189:1200/upload", timeout=2)  # do check if backup server is available
     except requests.exceptions.ConnectTimeout:
-        LOAD = False  # dont load module if it isnt
+        LOAD = False  # dont load module if it isn't
     else:
         LOAD = True  # load if it is
     NAME = "Backup"
