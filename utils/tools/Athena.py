@@ -11,7 +11,7 @@ from .Database import GuildDatabase
 import inspect
 
 
-class Athena(commands.Bot, ABC):
+class Athena(commands.Bot):
     """
     Client object for Discord bot. This class initializes the bot and loads all the Cogs.
     """
@@ -23,7 +23,8 @@ class Athena(commands.Bot, ABC):
     def __init__(self, *args, **kwargs):
         self.mode = self.INACTIVE
         self.console = Console()
-        self.configs: configuration = configuration.deserialize("./data/configuration/config.pkl")  # loads config from serialized file
+        self.configs: configuration = configuration.deserialize(
+            "./data/configuration/config.pkl")  # loads config from serialized file
         self.console.info_log("Deserialized Configuration Data")
         intents = nextcord.Intents.all()
         intents.members = True
@@ -39,8 +40,9 @@ class Athena(commands.Bot, ABC):
         self.console.info_log(f"Command prefix set to {self.configs.prefix}")
         self.persistent_views_added = False
         self.__load_extensions__()  # loads extensions
-        self.console.info_log(f"Cogs loaded successfully")
-        sys.stderr = Redirect(file_path="./data/logs/errors.log", print=False, console=self.console)
+        self.console.info_log(f"Extensions loaded successfully")
+        sys.stderr = Redirect(file_path="./data/logs/errors.log", print=False,
+                              console=self.console)  # start redirecting stderr
         self.console.info_log("__stderr__ redirected to ./data/logs/error.log")
 
         self.database: GuildDatabase = GuildDatabase("./data/guilds/guilds.db", console=self.console)
@@ -56,20 +58,20 @@ class Athena(commands.Bot, ABC):
         if mode == self.TESTING:
             self.mode = self.TESTING
             self.console.info_log("Starting bot in [red]TESTING[/red] mode.")
-
             self.run(self.configs.testing_token)
+
         elif mode == self.DISTRIBUTION:
             self.mode = self.DISTRIBUTION
             self.console.info_log("Starting bot in [red]DISTRIBUTION[/red] mode.")
             self.run(self.configs.token)
 
     def __load_extensions__(self):
-        from .. import commands
-        for name, extension in inspect.getmembers(commands):
-            if inspect.isclass(extension):
-                if hasattr(extension, "LOAD"):
-                    if extension.LOAD:
-                        self.add_cog(extension(self))
+        from .. import commands  # loads all available commands from commands packaged
+        for name, extension in inspect.getmembers(commands):  # inspects all members of this reference
+            if inspect.isclass(extension):  # checks if the member is a class
+                if hasattr(extension, "LOAD"):  # If the class is a commands object then it will have the LOAD attribute
+                    if extension.LOAD:  # if LOAD is true
+                        self.add_cog(extension(self))  # add the cog, pass in Athena as the client object
                         if hasattr(extension, "NAME"):
                             self.console.info_log(f"Loaded extension [yellow]>> {extension.NAME}[yellow]")
                         else:
