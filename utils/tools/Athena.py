@@ -50,7 +50,10 @@ class Athena(commands.Bot):
     async def on_ready(self):
         if not self.persistent_views_added:
             from ..commands.RSVP import rsvp_options
+            from ..commands.General import Verify
             # register persistent views
+
+            self.add_view(Verify(self.console))
             self.add_view(rsvp_options(self.console, reloaded=True))
             self.persistent_views_added = True
 

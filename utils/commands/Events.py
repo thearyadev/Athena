@@ -9,6 +9,7 @@ import io
 from ..tools import Guild
 from ..tools.Athena import Athena
 
+
 class events(commands.Cog, embeds):
     """
     Nextcord events
@@ -67,6 +68,33 @@ class events(commands.Cog, embeds):
         except Exception as e:
             print(e)
 
-    @commands.command("err")
-    async def err_sample(self, ctx):
-        raise Exception("your mom")
+    @commands.Cog.listener()
+    async def on_member_join(self, member):
+        await nextcord.utils.get(member.guild.channels,
+                                 id=951247441607413800).edit(
+            name=f"Members: {len(member.guild.members)}")
+
+        # send welcome message
+
+        welcome_channel = nextcord.utils.get(member.guild.channels, id=951242389782159450)
+        embed = nextcord.Embed(title=f"Welcome to {member.guild.name}, {member.name}. Enjoy your stay!",
+                               description="Check out the rules channel,"
+                                           " then go to role select to see the rest of the server.",
+                               color=embeds.SUCCESS)
+        embed.set_thumbnail(url=member.avatar)
+        self.client.console.info_log(f"Member join: {member.name}")
+        await welcome_channel.send(member.mention, embed=embed)
+
+    @commands.Cog.listener()
+    async def on_member_remove(self, member):
+        await nextcord.utils.get(member.guild.channels,
+                                 id=951247441607413800).edit(
+            name=f"Members: {len(member.guild.members)}")
+
+        # send welcome message
+
+        welcome_channel = nextcord.utils.get(member.guild.channels, id=951242389782159450)
+        embed = nextcord.Embed(title=f"Goodbye {member.name}", description="____", color=embeds.NEUTRAL)
+        embed.set_thumbnail(url=member.avatar)
+        self.client.console.info_log(f"Member leave: {member.name}")
+        await welcome_channel.send(member.mention, embed=embed)

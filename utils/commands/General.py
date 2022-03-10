@@ -10,6 +10,17 @@ import os
 from ..tools.Athena import Athena
 
 
+class Verify(nextcord.ui.View):
+    def __init__(self, console):
+        super().__init__(timeout=None)
+        self.console = console
+
+    @nextcord.ui.button(label='Verify', style=nextcord.ButtonStyle.green, custom_id="persistent_view:verify")
+    async def verify(self, button: nextcord.ui.Button, interaction: nextcord.Interaction):
+        await interaction.user.add_roles(nextcord.utils.get(interaction.guild.roles, name="Members"))
+        self.console.info_log(f"Verified User: {interaction.user.name} ")
+
+
 class general(commands.Cog, embeds):
     LOAD = True
     NAME = "General"
@@ -91,3 +102,8 @@ class general(commands.Cog, embeds):
                 await ctx.send(file=nextcord.File("./graphics/scrim.png"))
             else:
                 raise ValueError(f"Invalid command category: '{category}'")
+
+    @commands.command("show_verify")
+    async def show_verify_message(self, ctx):
+        embed = nextcord.Embed(title="User Verification", description="Press the button below to verify", color=embeds.SUCCESS)
+        await ctx.send(embed=embed, view=Verify(self.client.console))
