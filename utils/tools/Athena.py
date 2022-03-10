@@ -51,10 +51,12 @@ class Athena(commands.Bot):
         if not self.persistent_views_added:
             from ..commands.RSVP import rsvp_options
             from ..commands.General import Verify
+            from ..commands.RoleSelect import RoleSelectUI
             # register persistent views
 
             self.add_view(Verify(self.console))
             self.add_view(rsvp_options(self.console, reloaded=True))
+            self.add_view(RoleSelectUI(self.console))
             self.persistent_views_added = True
 
     def initialize(self, mode=TESTING):

@@ -104,6 +104,7 @@ class general(commands.Cog, embeds):
                 raise ValueError(f"Invalid command category: '{category}'")
 
     @commands.command("show_verify")
+    @commands.has_permissions(administrator=True)
     async def show_verify_message(self, ctx):
         embed = nextcord.Embed(title="User Verification", description="Press the button below to verify", color=embeds.SUCCESS)
         await ctx.send(embed=embed, view=Verify(self.client.console))
