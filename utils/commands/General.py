@@ -17,7 +17,7 @@ class Verify(nextcord.ui.View):
 
     @nextcord.ui.button(label='Verify', style=nextcord.ButtonStyle.green, custom_id="persistent_view:verify")
     async def verify(self, button: nextcord.ui.Button, interaction: nextcord.Interaction):
-        await interaction.user.add_roles(nextcord.utils.get(interaction.guild.roles, name="Members"))
+        await interaction.user.add_roles(nextcord.utils.get(interaction.guild.roles, name="Member"))
         self.console.info_log(f"Verified User: {interaction.user.name} ")
 
 
