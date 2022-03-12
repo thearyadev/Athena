@@ -139,6 +139,10 @@ class PugSession:
         3. Second preferred role.
         4. Third Preferered role
         """
+        # noinspection PyTypeChecker
+        self.team1: Type[Player] = dict(tankA=None, tankB=None, dpsA=None, dpsB=None, supportA=None, supportB=None)
+        # noinspection PyTypeChecker
+        self.team2: Type[Player] = dict(tankA=None, tankB=None, dpsA=None, dpsB=None, supportA=None, supportB=None)
 
         sorted_player_list = sorted(self._players, key=lambda p: p.games)
         for position in self.team1.keys():  # for each position
@@ -169,6 +173,41 @@ class PugSession:
                                   player[0].user.name != sorted_by_score[0][0].user.name]
 
         # once both teams are full, sorted playerlist may have a few players left that did not get selected.
+
+        # shuffle to make team gen random; just flip sides for a few players.
+        """
+        1. generate a random number between 1 and 6
+        2. find [num] position on both teams
+        3. switch them
+        """
+
+        for _ in range(2):
+            index = random.randint(1, 6)
+            if index == 1:
+                temp = self.team1['tankA']
+                self.team1['tankA'] = self.team2['tankA']
+                self.team2['tankA'] = temp
+            elif index == 2:
+                temp = self.team1['tankB']
+                self.team1['tankB'] = self.team2['tankB']
+                self.team2['tankB'] = temp
+            elif index == 3:
+                temp = self.team1['dpsA']
+                self.team1['dpsA'] = self.team2['dpsA']
+                self.team2['dpsA'] = temp
+            elif index == 4:
+                temp = self.team1['dpsB']
+                self.team1['dpsB'] = self.team2['dpsB']
+                self.team2['dpsB'] = temp
+            elif index == 5:
+                temp = self.team1['supportA']
+                self.team1['supportA'] = self.team2['supportA']
+                self.team2['supportA'] = temp
+            elif index == 6:
+                temp = self.team1['supportB']
+                self.team1['supportB'] = self.team2['supportB']
+                self.team2['supportB'] = temp
+
         self._pending = sorted_player_list
 
     @staticmethod
@@ -238,8 +277,6 @@ class PugSession:
         return _output
 
 
-
-
 @dataclass(order=True)
 class Player:
     user: Type[nextcord.Member]
@@ -274,25 +311,21 @@ if __name__ == "__main__":
     from rich.console import Console
     from rich.progress import track
 
+    class temp_user:
+        def __init__(self, name):
+            self.name = name
+
+        def __repr__(self):
+            return self.name
     console = Console()
-    results = [0, 0, 0, 0]
-    role_density = [0, 0, 0]
+    session = PugSession(None, None, None, None)
+    roles = ("tank", "dps", "support")
+    for i in range(12):
+        player = temp_user(name=f"Player {i}")
+
+        num_selected_roles = random.randint(1, 3)
+        selected_roles = [random.choice(roles) for _ in range(num_selected_roles)]
+        session.add_player(user=player, roles=tuple(selected_roles))
 
 
-    def eval_generation_quality(generation):
-        for role, player in generation.items():
-            role = role[:-1]
-            try:  # try and find the role they were placed in, in their preferred roles
-                results[player.roles.index(role)] += 1
-            except:
-                results[3] += 1
 
-            for r in player.roles:
-                if r == "tank":
-                    role_density[0] += 1
-
-                if r == "dps":
-                    role_density[1] += 1
-
-                if r == "support":
-                    role_density[2] += 1

@@ -5,6 +5,7 @@ from ..tools.PugTools import PugSession, Player
 import asyncio
 from ..tools.Athena import Athena
 
+
 class TeamPromptView(nextcord.ui.View):
     def __init__(self):
         super().__init__(timeout=2000)
@@ -57,9 +58,9 @@ class TeamPromptView(nextcord.ui.View):
         if interaction.user == self.session.lobby_manager:
             self.session.generate()
             embed = nextcord.Embed(color=embeds.DISCORD_BLUE)
-            embed.add_field(name="[ --- BLUE TEAM --- ]",
+            embed.add_field(name="[ --- TEAM 1 --- ]",
                             value=self.session.parse_to_string(1, self.Tank, self.DPS, self.Support))
-            embed.add_field(name="[ --- RED TEAM --- ]",
+            embed.add_field(name="[ --- TEAM 2 --- ]",
                             value=self.session.parse_to_string(2, self.Tank, self.DPS, self.Support))
             embed.add_field(name="[ --- PENDING --- ]",
                             value=self.session.parse_to_string(3, self.Tank, self.DPS, self.Support))
@@ -90,8 +91,8 @@ class PugSessionManagerTools(nextcord.ui.View):
 
     @nextcord.ui.button(label="End Round", style=nextcord.ButtonStyle.blurple)
     async def return_to_lobby(self, button: nextcord.ui.button, interaction: nextcord.Interaction):
-        await interaction.response.send_message("Moving all users. ")
         if self.session and interaction.user == self.session.lobby_manager:
+            await interaction.response.send_message("Moving all users. ")
             for user in self.session.team1_voice.members:
                 await user.move_to(self.session.lobby_voice)
                 await asyncio.sleep(1)
@@ -197,94 +198,70 @@ class pugs(commands.Cog, embeds):
         self.session: PugSession = None
 
     @commands.has_permissions(manage_channels=True)
-    @commands.command("pugsession", aliases=['ps'])
-    async def create_pug_session(self, ctx, *args):
-        if len(args) < 1:
-            raise Exception("Invalid entry.")
+    @commands.command("pugsession_create", aliases=['psc'])
+    async def create_pug_session(self, ctx,
+                                 lobby_voice: nextcord.VoiceChannel,
+                                 team1_voice: nextcord.VoiceChannel,
+                                 team2_voice: nextcord.VoiceChannel
+                                 ):
 
-        if args[0].lower() == "c" or args[0] == "create":
-            try:
-                lobby = nextcord.utils.get(ctx.guild.channels, id=int(args[1].replace("<#", "").replace(">", "")))
-            except:
-                raise Exception("Lobby is undefined.")
-            else:
+        tank = nextcord.utils.get(ctx.guild.emojis, name="Tank")
+        support = nextcord.utils.get(ctx.guild.emojis, name="Support")
+        dps = nextcord.utils.get(ctx.guild.emojis, name="DPS")
+        if not tank:
+            await ctx.guild.create_custom_emoji(name="Tank", image=open("./graphics/tank.gif", "rb").read(), reason="!ATHENA COMMAND UTILITY")
 
-                if not self.session:
-                    for chnl in lobby.category.channels:
-                        if chnl.name == "lobby" and isinstance(chnl, nextcord.VoiceChannel):
-                            lobby_voice = chnl
-                            break
-                    else:
-                        raise Exception("Lobby voice not found.")
+        if not tank:
+            await ctx.guild.create_custom_emoji(name="Support", image=open("./graphics/support.gif", "rb").read(),
+                                          reason="!ATHENA COMMAND UTILITY")
 
-                    for chnl in lobby.category.channels:
-                        if chnl.name == "blue-team" and isinstance(chnl, nextcord.VoiceChannel):
-                            blue_team_voice = chnl
-                            break
-                    else:
-                        raise Exception("Blue team voice not found.")
+        if not tank:
+            await ctx.guild.create_custom_emoji(name="DPS", image=open("./graphics/dps.gif", "rb").read(), reason="!ATHENA COMMAND UTILITY")
 
-                    for chnl in lobby.category.channels:
-                        if chnl.name == "red-team" and isinstance(chnl, nextcord.VoiceChannel):
-                            red_team_voice = chnl
-                            break
-                    else:
-                        raise Exception("Red team voice not found.")
+        if self.session:
+            raise Exception("Unable to make new pug session. Please end previous pug session")
 
-                    self.session = PugSession(manager=ctx.author,
-                                              lobby_voice=lobby_voice,
-                                              team1_voice=blue_team_voice,
-                                              team2_voice=red_team_voice)
-                else:
-                    raise Exception("Unable to make new pug session. Please end previous pug session")
+        self.session = PugSession(manager=ctx.author,
+                                  lobby_voice=lobby_voice,
+                                  team1_voice=team1_voice,
+                                  team2_voice=team2_voice)
 
-            embed = nextcord.Embed(
-                title="Pug Session: Create",
-                description=f"Pug Session has successfully been created. Please see below to "
-                            f"ensure the channels are correct. Players may now join the player "
-                            f"pool.",
-                color=self.SUCCESS
-            )
+        embed = nextcord.Embed(
+            title="Pug Session: Create",
+            description=f"Pug Session has successfully been created. Please see below to "
+                        f"ensure the channels are correct. Players may now join the player "
+                        f"pool.",
+            color=self.SUCCESS
+        )
 
-            embed.add_field(name="Lobby Voice", value=self.session.lobby_voice.mention, inline=True)
-            embed.add_field(name="Blue Team Voice", value=self.session.team1_voice.mention, inline=True)
-            embed.add_field(name="Red Team Voice", value=self.session.team2_voice.mention, inline=True)
-            embed.add_field(name="Session ID", value=self.session.session_id, inline=False)
-            embed.set_footer(text=f"Command issued by {ctx.message.author.name}#{ctx.message.author.discriminator}")
+        embed.add_field(name="Lobby Voice", value=self.session.lobby_voice.mention, inline=True)
+        embed.add_field(name="Team 1 Voice", value=self.session.team1_voice.mention, inline=True)
+        embed.add_field(name="Team 2 Voice", value=self.session.team2_voice.mention, inline=True)
+        embed.add_field(name="Session ID", value=self.session.session_id, inline=False)
+        embed.set_footer(text=f"Command issued by {ctx.message.author.name}#{ctx.message.author.discriminator}")
 
-            await ctx.send(embed=embed)
-
-            self.client.console.info_log(f"Pug session created. ID={self.session.session_id}")
+        await ctx.send(embed=embed)
+        self.client.console.info_log(f"Pug session created. ID={self.session.session_id}")
+        try:
             await self.session.lobby_voice.connect(reconnect=True)
-            self.client.console.info_log(f"Joined Pug Lobby Voice Channel")
+        except:
+            pass
 
-        elif args[0].lower() == "d" or args[0].lower() == "delete":
-            if not self.session:
-                raise Exception("There is no active pug session.")
+        self.client.console.info_log(f"Joined Pug Lobby Voice Channel")
 
-            self.session = None
-            embed = nextcord.Embed(title="Pug Session: Delete", description="Pug session has been deleted.",
-                                   color=self.SUCCESS)
-            embed.set_footer(text=f"Command issued by {ctx.message.author.name}#{ctx.message.author.discriminator}")
-            await ctx.send(embed=embed)
+    @commands.has_permissions(manage_channels=True)
+    @commands.command("pugsession_delete", aliases=['psd'])
+    async def delete_pug_session(self, ctx):
+        if not self.session:
+            raise Exception("There is no active pug session.")
 
-            self.client.console.info_log(f"Pug Session Deleted")
+        self.session = None
+        embed = nextcord.Embed(title="Pug Session: Delete", description="Pug session has been deleted.",
+                               color=self.SUCCESS)
+        embed.set_footer(text=f"Command issued by {ctx.message.author.name}#{ctx.message.author.discriminator}")
+        await ctx.send(embed=embed)
 
-        elif args[0].lower() == "s" or args[0].lower() == "show":
-            if self.session:
-                embed = nextcord.Embed(title="Pug Session: Show Active Session",
-                                       description="Currently active pug session.", color=self.SUCCESS)
-
-                embed.add_field(name="Lobby Voice", value=self.session.lobby_voice.mention, inline=True)
-                embed.add_field(name="Blue Team Voice", value=self.session.team1_voice.mention, inline=True)
-                embed.add_field(name="Red Team Voice", value=self.session.team2_voice.mention, inline=True)
-                embed.add_field(name="Session ID", value=self.session.session_id, inline=False)
-                embed.add_field(name="Manager", value=self.session.lobby_manager.mention, inline=False)
-                embed.set_footer(text=f"Command issued by {ctx.message.author.name}#{ctx.message.author.discriminator}")
-                await ctx.send(embed=embed)
-                self.client.console.info_log(f"Session data sent to {ctx.channel}")
-            else:
-                raise Exception("There is no active pug session.")
+        self.client.console.info_log(f"Pug Session Deleted")
 
     @commands.command("play", aliases=["p"])
     async def register_player(self, ctx):
@@ -313,6 +290,7 @@ class pugs(commands.Cog, embeds):
             await role_view.wait()
             await role_view.src_message.edit(view=None)
             added_player = self.session.add_player(user=ctx.author, roles=tuple(role_view.roles))
+            print(added_player)
             self.client.console.info_log(
                 f"Player added to Pug Session player pool: Player={added_player.user}, Roles={added_player.roles}")
         else:
@@ -328,8 +306,8 @@ class pugs(commands.Cog, embeds):
                 Support = nextcord.utils.get(ctx.guild.emojis, name='Support')
                 self.session.generate()
                 embed = nextcord.Embed(color=self.DISCORD_BLUE)
-                embed.add_field(name="[ --- BLUE TEAM --- ]", value=self.session.parse_to_string(1, Tank, DPS, Support))
-                embed.add_field(name="[ --- RED TEAM --- ]", value=self.session.parse_to_string(2, Tank, DPS, Support))
+                embed.add_field(name="[ --- TEAM 1 --- ]", value=self.session.parse_to_string(1, Tank, DPS, Support))
+                embed.add_field(name="[ --- TEAM 2 --- ]", value=self.session.parse_to_string(2, Tank, DPS, Support))
                 embed.add_field(name="[ --- PENDING --- ]", value=self.session.parse_to_string(3, Tank, DPS, Support))
                 view = TeamPromptView()
                 view.session = self.session
